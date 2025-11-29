@@ -8,12 +8,14 @@ interface Service {
   id: number
   nombre: string
   precio: number
+  activo?: boolean
 }
 
 interface Product {
   id: number
   nombre: string
   precio: number
+  activo?: boolean
 }
 
 interface PackageData {

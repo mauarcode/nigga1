@@ -34,7 +34,7 @@ export default function PublicGallery() {
         const data = await response.json()
         const items = Array.isArray(data) ? data : data.results || []
         // Filtrar solo activos y ordenar
-        const activeItems = items.filter((item: GalleryItem) => item.activo).sort((a, b) => a.orden - b.orden)
+        const activeItems = items.filter((item: GalleryItem) => item.activo).sort((a: GalleryItem, b: GalleryItem) => a.orden - b.orden)
         setGalleryItems(activeItems)
       }
     } catch (error) {

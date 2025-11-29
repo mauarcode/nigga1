@@ -50,14 +50,14 @@ export default function GalleryManager() {
       let nextUrl: string | null = 'http://137.184.35.178:8000/api/contenido/'
       
       while (nextUrl) {
-        const response = await fetch(nextUrl, {
+        const response: Response = await fetch(nextUrl, {
           headers: {
             'Authorization': `Bearer ${accessToken}`,
           },
         })
 
         if (response.ok) {
-          const data = await response.json()
+          const data: any = await response.json()
           const pageData = Array.isArray(data) ? data : data.results || []
           allItems = [...allItems, ...pageData]
           nextUrl = data.next || null
@@ -172,7 +172,7 @@ export default function GalleryManager() {
       if (response.ok) {
         const data = await response.json()
         const items = Array.isArray(data) ? data : data.results || []
-        setGalleryItems(items.sort((a, b) => a.orden - b.orden))
+        setGalleryItems(items.sort((a: any, b: any) => a.orden - b.orden))
       }
     } catch (error) {
       console.error('Error loading gallery:', error)
@@ -657,7 +657,7 @@ export default function GalleryManager() {
                       {previewUrl || editingItem.imagen ? (
                         <div className="space-y-4">
                           <img
-                            src={previewUrl || (editingItem.imagen.startsWith('http') ? editingItem.imagen : `http://137.184.35.178:8000${editingItem.imagen}`)}
+                            src={previewUrl || (editingItem.imagen && editingItem.imagen.startsWith('http') ? editingItem.imagen : `http://137.184.35.178:8000${editingItem.imagen || ''}`)}
                             alt="Preview"
                             className="max-h-64 mx-auto rounded"
                             onError={(e) => {

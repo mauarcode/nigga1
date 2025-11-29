@@ -61,19 +61,19 @@ export default function AppointmentAlerts() {
     }
   }
 
-  const handleWhatsAppClick = async (alert: AppointmentAlert) => {
-    if (!alert.whatsapp_url) {
-      alert('No hay número de teléfono disponible para este cliente')
+  const handleWhatsAppClick = async (alertItem: AppointmentAlert) => {
+    if (!alertItem.whatsapp_url) {
+      window.alert('No hay número de teléfono disponible para este cliente')
       return
     }
 
     // Abrir WhatsApp en nueva pestaña
-    window.open(alert.whatsapp_url, '_blank')
+    window.open(alertItem.whatsapp_url, '_blank')
 
     // Marcar alerta como enviada
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://137.184.35.178:8000/api/admin/alertas/${alert.id}/enviar/`, {
+      const response = await fetch(`http://137.184.35.178:8000/api/admin/alertas/${alertItem.id}/enviar/`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -82,7 +82,7 @@ export default function AppointmentAlerts() {
 
       if (response.ok) {
         // Remover la alerta de la lista
-        setAlerts((prev) => prev.filter((a) => a.id !== alert.id))
+        setAlerts((prev) => prev.filter((a) => a.id !== alertItem.id))
       }
     } catch (err) {
       console.error('Error al marcar alerta como enviada:', err)
