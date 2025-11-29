@@ -36,7 +36,7 @@ export default function ServiciosPage() {
         setServices(activeServices)
         
         // Extraer categorías únicas (si existen en los servicios)
-        const uniqueCategories = [...new Set(servicesData.map((s: any) => s.categoria).filter(Boolean))]
+        const uniqueCategories = Array.from(new Set(servicesData.map((s: any) => s.categoria).filter(Boolean))) as string[]
         setCategories(uniqueCategories.length > 0 ? uniqueCategories : ['Todos los servicios'])
         
         setLoading(false)
