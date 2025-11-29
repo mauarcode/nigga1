@@ -1,0 +1,62 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+.venv/
+ENV/
+env/
+.env
+*.egg-info/
+dist/
+build/
+
+# Entorno virtual de Windows
+Lib/
+Include/
+Scripts/
+pyvenv.cfg
+
+# Node.js
+node_modules/
+.next/
+out/
+.npm
+
+# Archivos de entorno
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Base de datos local
+db.sqlite3
+*.sqlite3
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Instaladores
+*.msi
+*.exe
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Archivos de test
+test_cors.py
+
+# Media (opcional - descomenta si quieres incluir las imágenes)
+# Media/
