@@ -44,7 +44,7 @@ export default function AppointmentsManager() {
         return
       }
 
-      const response = await fetch('http://localhost:8000/api/citas/', {
+      const response = await fetch('http://137.184.35.178:8000/api/citas/', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -117,7 +117,7 @@ export default function AppointmentsManager() {
         return
       }
 
-      const response = await fetch(`http://localhost:8000/api/citas/${id}/`, {
+      const response = await fetch(`http://137.184.35.178:8000/api/citas/${id}/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -362,4 +362,5 @@ export default function AppointmentsManager() {
     </div>
   )
 }
+
 

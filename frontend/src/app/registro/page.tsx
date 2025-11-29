@@ -105,7 +105,7 @@ export default function RegistroPage() {
       const username = formData.email.split('@')[0]
 
       // Llamada real a la API de registro
-      const response = await fetch('http://localhost:8000/api/usuarios/', {
+      const response = await fetch('http://137.184.35.178:8000/api/usuarios/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -128,7 +128,7 @@ export default function RegistroPage() {
 
         // Hacer login automático después del registro
         try {
-          const loginResponse = await fetch('http://localhost:8000/api/login/', {
+          const loginResponse = await fetch('http://137.184.35.178:8000/api/login/', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -488,3 +488,4 @@ export default function RegistroPage() {
     </div>
   )
 }
+

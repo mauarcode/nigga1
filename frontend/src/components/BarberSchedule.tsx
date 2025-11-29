@@ -38,7 +38,7 @@ export default function BarberSchedule() {
       const token = localStorage.getItem('access_token')
       const userId = localStorage.getItem('user_id')
       
-      const response = await fetch('http://localhost:8000/api/barberos/', {
+      const response = await fetch('http://137.184.35.178:8000/api/barberos/', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -103,7 +103,7 @@ export default function BarberSchedule() {
     try {
       const token = localStorage.getItem('access_token')
 
-      const response = await fetch(`http://localhost:8000/api/barberos/${barberId}/`, {
+      const response = await fetch(`http://137.184.35.178:8000/api/barberos/${barberId}/`, {
         method: 'PATCH',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -290,4 +290,5 @@ export default function BarberSchedule() {
     </div>
   )
 }
+
 

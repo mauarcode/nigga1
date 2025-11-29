@@ -76,7 +76,7 @@ export default function ClientDashboard() {
         setLoading(true)
 
         // Cargar citas del cliente
-        const appointmentsResponse = await fetch('http://localhost:8000/api/citas/', {
+        const appointmentsResponse = await fetch('http://137.184.35.178:8000/api/citas/', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -119,7 +119,7 @@ export default function ClientDashboard() {
         }
 
         // Cargar perfil del cliente (para programa de fidelización)
-        const profileResponse = await fetch('http://localhost:8000/api/clientes/', {
+        const profileResponse = await fetch('http://137.184.35.178:8000/api/clientes/', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -217,7 +217,7 @@ export default function ClientDashboard() {
 
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://localhost:8000/api/citas/${appointmentId}/`, {
+      const response = await fetch(`http://137.184.35.178:8000/api/citas/${appointmentId}/`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -544,3 +544,4 @@ export default function ClientDashboard() {
     </div>
   )
 }
+

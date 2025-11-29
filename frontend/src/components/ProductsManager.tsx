@@ -77,7 +77,7 @@ export default function ProductsManager() {
     setLoading(true)
     try {
       const token = localStorage.getItem('access_token')
-      const response = await axios.get('http://localhost:8000/api/productos/', {
+      const response = await axios.get('http://137.184.35.178:8000/api/productos/', {
         headers: token ? { Authorization: `Bearer ${token}` } : undefined,
       })
       const rawProducts: any[] = Array.isArray(response.data)
@@ -136,7 +136,7 @@ export default function ProductsManager() {
         return
       }
       await axios.patch(
-        `http://localhost:8000/api/productos/${product.id}/`,
+        `http://137.184.35.178:8000/api/productos/${product.id}/`,
         { activo: !product.activo },
         {
           headers: {
@@ -165,7 +165,7 @@ export default function ProductsManager() {
       stock: product.stock,
       activo: product.activo,
     })
-    setPreviewUrl(product.imagen ? `http://localhost:8000${product.imagen}` : null)
+    setPreviewUrl(product.imagen ? `http://137.184.35.178:8000${product.imagen}` : null)
     setSelectedImage(null)
     setShowModal(true)
   }
@@ -179,7 +179,7 @@ export default function ProductsManager() {
       if (!authHeaders) {
         return
       }
-      await axios.delete(`http://localhost:8000/api/productos/${product.id}/`, {
+      await axios.delete(`http://137.184.35.178:8000/api/productos/${product.id}/`, {
         headers: {
           ...authHeaders,
         },
@@ -233,7 +233,7 @@ export default function ProductsManager() {
       }
 
       if (isEditing && currentProduct) {
-        await axios.patch(`http://localhost:8000/api/productos/${currentProduct.id}/`, payload, {
+        await axios.patch(`http://137.184.35.178:8000/api/productos/${currentProduct.id}/`, payload, {
           headers: {
             ...authHeaders,
             'Content-Type': 'multipart/form-data',
@@ -241,7 +241,7 @@ export default function ProductsManager() {
         })
         alert('Producto actualizado correctamente.')
       } else {
-        await axios.post('http://localhost:8000/api/productos/', payload, {
+        await axios.post('http://137.184.35.178:8000/api/productos/', payload, {
           headers: {
             ...authHeaders,
             'Content-Type': 'multipart/form-data',
@@ -347,7 +347,7 @@ export default function ProductsManager() {
 
                   {product.imagen ? (
                     <img
-                      src={product.imagen.startsWith('http') ? product.imagen : `http://localhost:8000${product.imagen}`}
+                      src={product.imagen.startsWith('http') ? product.imagen : `http://137.184.35.178:8000${product.imagen}`}
                       alt={product.nombre}
                       className="w-full h-40 object-cover rounded-lg mb-4"
                     />
@@ -529,5 +529,6 @@ export default function ProductsManager() {
     </div>
   )
 }
+
 
 

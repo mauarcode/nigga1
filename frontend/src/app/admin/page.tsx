@@ -132,7 +132,7 @@ export default function AdminDashboard() {
 
     try {
       // Cargar estadísticas
-      const statsResponse = await fetch('http://localhost:8000/api/admin/estadisticas-generales/', {
+      const statsResponse = await fetch('http://137.184.35.178:8000/api/admin/estadisticas-generales/', {
         headers: authHeaders,
         cache: 'no-store',
       })
@@ -144,7 +144,7 @@ export default function AdminDashboard() {
       }
 
       // Cargar datos del dashboard
-      const dashboardResponse = await fetch('http://localhost:8000/api/admin/dashboard/', {
+      const dashboardResponse = await fetch('http://137.184.35.178:8000/api/admin/dashboard/', {
         headers: authHeaders,
         cache: 'no-store',
       })
@@ -156,7 +156,7 @@ export default function AdminDashboard() {
       }
 
       // Cargar contenido del sitio web
-      const contentResponse = await fetch('http://localhost:8000/api/admin/contenido-sitio/', {
+      const contentResponse = await fetch('http://137.184.35.178:8000/api/admin/contenido-sitio/', {
         headers: authHeaders,
         cache: 'no-store',
       })
@@ -186,7 +186,7 @@ export default function AdminDashboard() {
   const handleSaveContent = async (tipo_contenido: string) => {
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch('http://localhost:8000/api/admin/contenido-sitio/', {
+      const response = await fetch('http://137.184.35.178:8000/api/admin/contenido-sitio/', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -525,3 +525,4 @@ export default function AdminDashboard() {
     </div>
   )
 }
+

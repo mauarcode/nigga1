@@ -38,7 +38,7 @@ export default function AppointmentAlerts() {
         return
       }
 
-      const response = await fetch('http://localhost:8000/api/admin/alertas/', {
+      const response = await fetch('http://137.184.35.178:8000/api/admin/alertas/', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -73,7 +73,7 @@ export default function AppointmentAlerts() {
     // Marcar alerta como enviada
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://localhost:8000/api/admin/alertas/${alert.id}/enviar/`, {
+      const response = await fetch(`http://137.184.35.178:8000/api/admin/alertas/${alert.id}/enviar/`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -229,4 +229,5 @@ export default function AppointmentAlerts() {
     </div>
   )
 }
+
 

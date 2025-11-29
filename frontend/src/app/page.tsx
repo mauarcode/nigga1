@@ -103,7 +103,7 @@ export default function HomePage() {
     const loadHomeData = async () => {
       try {
         // Cargar servicios destacados (primeros 3)
-        const servicesResponse = await fetch('http://localhost:8000/api/servicios/', { cache: 'no-store' })
+        const servicesResponse = await fetch('http://137.184.35.178:8000/api/servicios/', { cache: 'no-store' })
         const servicesData = await servicesResponse.json()
         const services = (servicesData.results || servicesData).slice(0, 3)
         setFeaturedServices(services)
@@ -111,7 +111,7 @@ export default function HomePage() {
         // Cargar contenido del sitio (texto e imágenes configurables)
         // Cargar todas las páginas si hay paginación
         let allContentData: WebsiteContentItem[] = []
-        let nextUrl: string | null = 'http://localhost:8000/api/contenido/'
+        let nextUrl: string | null = 'http://137.184.35.178:8000/api/contenido/'
         
         while (nextUrl) {
           const contentResponse = await fetch(nextUrl, { cache: 'no-store' })
@@ -154,12 +154,12 @@ export default function HomePage() {
         setContentMap(byKey)
 
         // Cargar galería
-        const galleryResponse = await fetch('http://localhost:8000/api/galeria/', { cache: 'no-store' })
+        const galleryResponse = await fetch('http://137.184.35.178:8000/api/galeria/', { cache: 'no-store' })
         const galleryData = await galleryResponse.json()
         setGallery(galleryData.results || galleryData)
 
         // Cargar productos
-        const productsResponse = await fetch('http://localhost:8000/api/productos/', { cache: 'no-store' })
+        const productsResponse = await fetch('http://137.184.35.178:8000/api/productos/', { cache: 'no-store' })
         const productsData = await productsResponse.json()
         const normalizedProducts = (productsData.results || productsData || []).map((product: any) => ({
           ...product,
@@ -168,13 +168,13 @@ export default function HomePage() {
         setProducts(normalizedProducts)
 
         // Cargar paquetes
-        const packagesResponse = await fetch('http://localhost:8000/api/paquetes/', { cache: 'no-store' })
+        const packagesResponse = await fetch('http://137.184.35.178:8000/api/paquetes/', { cache: 'no-store' })
         const packagesData = await packagesResponse.json()
         const packagesList = (packagesData.results || packagesData || []).filter((pkg: Package) => pkg.activo !== false)
         setPackages(packagesList)
 
         // Cargar testimonios
-        const testimonialsResponse = await fetch('http://localhost:8000/api/testimonios/', { cache: 'no-store' })
+        const testimonialsResponse = await fetch('http://137.184.35.178:8000/api/testimonios/', { cache: 'no-store' })
         const testimonialsData = await testimonialsResponse.json()
         setTestimonials(testimonialsData.results || testimonialsData)
 
@@ -201,7 +201,7 @@ export default function HomePage() {
     if (typeof logoContent.imagen === 'string') {
       logoImage = logoContent.imagen.startsWith('http') 
         ? logoContent.imagen 
-        : `http://localhost:8000${logoContent.imagen}`
+        : `http://137.184.35.178:8000${logoContent.imagen}`
     }
   }
   console.log('Logo cargado:', { logoContent, logoImage })
@@ -571,7 +571,7 @@ export default function HomePage() {
         className="relative min-h-[90vh] flex items-center justify-center pt-16"
         style={{
           backgroundImage: heroBackgroundImage
-            ? `url(${heroBackgroundImage.startsWith('http') ? heroBackgroundImage : `http://localhost:8000${heroBackgroundImage}`})`
+            ? `url(${heroBackgroundImage.startsWith('http') ? heroBackgroundImage : `http://137.184.35.178:8000${heroBackgroundImage}`})`
             : undefined,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
@@ -695,7 +695,7 @@ export default function HomePage() {
                     {pkg.imagen ? (
                       <div className="w-full h-48 relative rounded-lg overflow-hidden">
                         <img
-                          src={pkg.imagen.startsWith('http') ? pkg.imagen : `http://localhost:8000${pkg.imagen}`}
+                          src={pkg.imagen.startsWith('http') ? pkg.imagen : `http://137.184.35.178:8000${pkg.imagen}`}
                           alt={pkg.nombre}
                           className="w-full h-full object-cover"
                         />
@@ -764,7 +764,7 @@ export default function HomePage() {
                 <div key={product.id} className="border rounded-xl shadow-sm hover:shadow-md transition-shadow bg-white">
                   {product.imagen ? (
                     <img
-                      src={product.imagen.startsWith('http') ? product.imagen : `http://localhost:8000${product.imagen}`}
+                      src={product.imagen.startsWith('http') ? product.imagen : `http://137.184.35.178:8000${product.imagen}`}
                       alt={product.nombre}
                       className="w-full h-48 object-cover rounded-t-xl"
                     />
@@ -826,7 +826,7 @@ export default function HomePage() {
                     src={
                       contentMap['establecimiento_imagen'].imagen.startsWith('http')
                         ? contentMap['establecimiento_imagen'].imagen
-                        : `http://localhost:8000${contentMap['establecimiento_imagen'].imagen}`
+                        : `http://137.184.35.178:8000${contentMap['establecimiento_imagen'].imagen}`
                     }
                     alt="Establecimiento"
                     className="w-full h-96 object-cover rounded-lg"
@@ -877,10 +877,10 @@ export default function HomePage() {
                       autoPlay={false}
                       muted
                       playsInline
-                      poster={conocenosVideo.imagen ? (conocenosVideo.imagen.startsWith('http') ? conocenosVideo.imagen : `http://localhost:8000${conocenosVideo.imagen}`) : undefined}
+                      poster={conocenosVideo.imagen ? (conocenosVideo.imagen.startsWith('http') ? conocenosVideo.imagen : `http://137.184.35.178:8000${conocenosVideo.imagen}`) : undefined}
                     >
                       <source
-                        src={conocenosVideo.video_file.startsWith('http') ? conocenosVideo.video_file : `http://localhost:8000${conocenosVideo.video_file}`}
+                        src={conocenosVideo.video_file.startsWith('http') ? conocenosVideo.video_file : `http://137.184.35.178:8000${conocenosVideo.video_file}`}
                         type="video/mp4"
                       />
                       Tu navegador no soporta la reproducción de videos.
@@ -945,7 +945,7 @@ export default function HomePage() {
                 <div key={item.id} className="relative aspect-square bg-gray-200 rounded-lg overflow-hidden">
                   {item.imagen ? (
                     <img
-                      src={item.imagen.startsWith('http') ? item.imagen : `http://localhost:8000${item.imagen}`}
+                      src={item.imagen.startsWith('http') ? item.imagen : `http://137.184.35.178:8000${item.imagen}`}
                       alt={item.titulo || 'Trabajo de la barbería'}
                       className="w-full h-full object-cover"
                       onError={(e) => {
@@ -1170,3 +1170,4 @@ export default function HomePage() {
     </div>
   )
 }
+

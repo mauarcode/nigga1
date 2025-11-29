@@ -28,7 +28,7 @@ export default function PublicGallery() {
   const loadGalleryItems = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://localhost:8000/api/galeria/')
+      const response = await fetch('http://137.184.35.178:8000/api/galeria/')
       
       if (response.ok) {
         const data = await response.json()
@@ -119,7 +119,7 @@ export default function PublicGallery() {
             {item.imagen ? (
               <div className="relative">
                 <img
-                  src={`http://localhost:8000${item.imagen}`}
+                  src={`http://137.184.35.178:8000${item.imagen}`}
                   alt={item.titulo}
                   className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
                 />
@@ -182,7 +182,7 @@ export default function PublicGallery() {
             {selectedItem.imagen ? (
               <div className="relative">
                 <img
-                  src={`http://localhost:8000${selectedItem.imagen}`}
+                  src={`http://137.184.35.178:8000${selectedItem.imagen}`}
                   alt={selectedItem.titulo}
                   className="w-full h-auto max-h-[80vh] object-contain mx-auto"
                 />
@@ -224,5 +224,6 @@ export default function PublicGallery() {
     </>
   )
 }
+
 
 

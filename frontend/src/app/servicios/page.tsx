@@ -25,7 +25,7 @@ export default function ServiciosPage() {
     const loadServices = async () => {
       try {
         setLoading(true)
-        const response = await fetch('http://localhost:8000/api/servicios/')
+        const response = await fetch('http://137.184.35.178:8000/api/servicios/')
         const data = await response.json()
         
         // La API puede devolver data.results (paginado) o data directamente (array)
@@ -267,3 +267,4 @@ export default function ServiciosPage() {
     </div>
   )
 }
+

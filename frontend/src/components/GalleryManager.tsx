@@ -47,7 +47,7 @@ export default function GalleryManager() {
       const accessToken = localStorage.getItem('access_token')
       // Cargar todas las páginas si hay paginación
       let allItems: WebsiteContentImage[] = []
-      let nextUrl: string | null = 'http://localhost:8000/api/contenido/'
+      let nextUrl: string | null = 'http://137.184.35.178:8000/api/contenido/'
       
       while (nextUrl) {
         const response = await fetch(nextUrl, {
@@ -131,8 +131,8 @@ export default function GalleryManager() {
       }
 
       const url = item.id && item.id > 0
-        ? `http://localhost:8000/api/contenido/${item.id}/`
-        : 'http://localhost:8000/api/contenido/'
+        ? `http://137.184.35.178:8000/api/contenido/${item.id}/`
+        : 'http://137.184.35.178:8000/api/contenido/'
       const method = (item.id && item.id > 0) ? 'PATCH' : 'POST'
 
       const response = await fetch(url, {
@@ -163,7 +163,7 @@ export default function GalleryManager() {
     try {
       setLoading(true)
       const accessToken = localStorage.getItem('access_token')
-      const response = await fetch('http://localhost:8000/api/galeria/', {
+      const response = await fetch('http://137.184.35.178:8000/api/galeria/', {
         headers: {
           'Authorization': `Bearer ${accessToken}`,
         },
@@ -237,8 +237,8 @@ export default function GalleryManager() {
       }
 
       const url = editingItem.id
-        ? `http://localhost:8000/api/galeria/${editingItem.id}/`
-        : 'http://localhost:8000/api/galeria/'
+        ? `http://137.184.35.178:8000/api/galeria/${editingItem.id}/`
+        : 'http://137.184.35.178:8000/api/galeria/'
 
       const method = editingItem.id ? 'PATCH' : 'POST'
 
@@ -272,7 +272,7 @@ export default function GalleryManager() {
 
     try {
       const accessToken = localStorage.getItem('access_token')
-      const response = await fetch(`http://localhost:8000/api/galeria/${id}/`, {
+      const response = await fetch(`http://137.184.35.178:8000/api/galeria/${id}/`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${accessToken}`,
@@ -309,7 +309,7 @@ export default function GalleryManager() {
     try {
       const accessToken = localStorage.getItem('access_token')
       
-      await fetch(`http://localhost:8000/api/galeria/${newItems[currentIndex].id}/`, {
+      await fetch(`http://137.184.35.178:8000/api/galeria/${newItems[currentIndex].id}/`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${accessToken}`,
@@ -318,7 +318,7 @@ export default function GalleryManager() {
         body: JSON.stringify({ orden: newItems[currentIndex].orden }),
       })
 
-      await fetch(`http://localhost:8000/api/galeria/${newItems[targetIndex].id}/`, {
+      await fetch(`http://137.184.35.178:8000/api/galeria/${newItems[targetIndex].id}/`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${accessToken}`,
@@ -400,7 +400,7 @@ export default function GalleryManager() {
                 <div className="relative h-48 bg-gray-100">
                   {item.imagen ? (
                     <img
-                      src={item.imagen.startsWith('http') ? item.imagen : `http://localhost:8000${item.imagen}`}
+                      src={item.imagen.startsWith('http') ? item.imagen : `http://137.184.35.178:8000${item.imagen}`}
                       alt={getImageLabel(item.tipo_contenido)}
                       className="w-full h-full object-cover"
                     />
@@ -463,7 +463,7 @@ export default function GalleryManager() {
             <div className="relative h-48 bg-gray-100">
               {item.imagen ? (
                 <img
-                  src={item.imagen.startsWith('http') ? item.imagen : `http://localhost:8000${item.imagen}`}
+                  src={item.imagen.startsWith('http') ? item.imagen : `http://137.184.35.178:8000${item.imagen}`}
                   alt={item.titulo}
                   className="w-full h-full object-cover"
                   onError={(e) => {
@@ -657,7 +657,7 @@ export default function GalleryManager() {
                       {previewUrl || editingItem.imagen ? (
                         <div className="space-y-4">
                           <img
-                            src={previewUrl || (editingItem.imagen.startsWith('http') ? editingItem.imagen : `http://localhost:8000${editingItem.imagen}`)}
+                            src={previewUrl || (editingItem.imagen.startsWith('http') ? editingItem.imagen : `http://137.184.35.178:8000${editingItem.imagen}`)}
                             alt="Preview"
                             className="max-h-64 mx-auto rounded"
                             onError={(e) => {
@@ -903,7 +903,7 @@ export default function GalleryManager() {
                     {previewUrl || editingWebsiteImage.imagen ? (
                       <div className="space-y-4">
                         <img
-                          src={previewUrl || (editingWebsiteImage.imagen?.startsWith('http') ? editingWebsiteImage.imagen : `http://localhost:8000${editingWebsiteImage.imagen}`)}
+                          src={previewUrl || (editingWebsiteImage.imagen?.startsWith('http') ? editingWebsiteImage.imagen : `http://137.184.35.178:8000${editingWebsiteImage.imagen}`)}
                           alt="Preview"
                           className="max-h-64 mx-auto rounded"
                         />
@@ -1012,5 +1012,6 @@ export default function GalleryManager() {
     </div>
   )
 }
+
 
 

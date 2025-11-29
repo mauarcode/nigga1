@@ -49,7 +49,7 @@ const [formData, setFormData] = useState<FormData>({
     setLoading(true)
     try {
       const token = localStorage.getItem('access_token')
-      const response = await axios.get('http://localhost:8000/api/admin/servicios/', {
+      const response = await axios.get('http://137.184.35.178:8000/api/admin/servicios/', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -129,7 +129,7 @@ const [formData, setFormData] = useState<FormData>({
       if (isEditing && currentService) {
         // Actualizar servicio existente
         await axios.put(
-          `http://localhost:8000/api/admin/servicios/${currentService.id}/`,
+          `http://137.184.35.178:8000/api/admin/servicios/${currentService.id}/`,
           formData,
           { headers }
         )
@@ -137,7 +137,7 @@ const [formData, setFormData] = useState<FormData>({
       } else {
         // Crear nuevo servicio
         await axios.post(
-          'http://localhost:8000/api/admin/servicios/',
+          'http://137.184.35.178:8000/api/admin/servicios/',
           formData,
           { headers }
         )
@@ -161,7 +161,7 @@ const [formData, setFormData] = useState<FormData>({
 
     try {
       const token = localStorage.getItem('access_token')
-      await axios.delete(`http://localhost:8000/api/admin/servicios/${service.id}/`, {
+      await axios.delete(`http://137.184.35.178:8000/api/admin/servicios/${service.id}/`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -421,4 +421,5 @@ const [formData, setFormData] = useState<FormData>({
     </div>
   )
 }
+
 

@@ -67,7 +67,7 @@ export default function SurveyModal({ token, appointmentId, onClose, onSubmitted
   useEffect(() => {
     const loadInfo = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/api/encuestas/info/?token=${token}`)
+        const response = await fetch(`http://137.184.35.178:8000/api/encuestas/info/?token=${token}`)
         if (!response.ok) {
           throw new Error('No se pudo obtener la información de la encuesta')
         }
@@ -106,7 +106,7 @@ export default function SurveyModal({ token, appointmentId, onClose, onSubmitted
       setSubmitting(true)
       setError('')
 
-      const response = await fetch('http://localhost:8000/api/encuestas/enviar/', {
+      const response = await fetch('http://137.184.35.178:8000/api/encuestas/enviar/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -353,4 +353,5 @@ function XIcon() {
     </svg>
   )
 }
+
 

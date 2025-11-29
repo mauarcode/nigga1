@@ -86,7 +86,7 @@ export default function PublicSurveyPage() {
           }
 
           // Obtener información de la cita
-          const appointmentResponse = await fetch(`http://localhost:8000/api/citas/${paramValue}/`, {
+          const appointmentResponse = await fetch(`http://137.184.35.178:8000/api/citas/${paramValue}/`, {
             headers: {
               'Authorization': `Bearer ${authToken}`
             }
@@ -99,7 +99,7 @@ export default function PublicSurveyPage() {
           const appointment = await appointmentResponse.json()
           
           // Intentar obtener el survey token de la cita
-          const surveyResponse = await fetch(`http://localhost:8000/api/encuestas/?cita=${paramValue}`, {
+          const surveyResponse = await fetch(`http://137.184.35.178:8000/api/encuestas/?cita=${paramValue}`, {
             headers: {
               'Authorization': `Bearer ${authToken}`
             }
@@ -127,7 +127,7 @@ export default function PublicSurveyPage() {
 
         // Es un token normal, proceder normalmente
         hasProcessedRef.current = true
-        const response = await fetch(`http://localhost:8000/api/encuestas/info/?token=${paramValue}`)
+        const response = await fetch(`http://137.184.35.178:8000/api/encuestas/info/?token=${paramValue}`)
         if (!response.ok) {
           throw new Error('No se encontró la encuesta solicitada')
         }
@@ -168,7 +168,7 @@ export default function PublicSurveyPage() {
       setSubmitting(true)
       setError('')
 
-      const response = await fetch('http://localhost:8000/api/encuestas/enviar/', {
+      const response = await fetch('http://137.184.35.178:8000/api/encuestas/enviar/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

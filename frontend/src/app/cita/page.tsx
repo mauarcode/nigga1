@@ -100,7 +100,7 @@ export default function CitaPage() {
         setLoading(true)
         
         // Cargar servicios
-        const servicesResponse = await fetch('http://localhost:8000/api/servicios/')
+        const servicesResponse = await fetch('http://137.184.35.178:8000/api/servicios/')
         const servicesData = await servicesResponse.json()
         const rawServices = servicesData.results || servicesData || []
         const normalizedServices: Service[] = rawServices
@@ -120,7 +120,7 @@ export default function CitaPage() {
         setServices(activeServices)
 
         // Cargar paquetes
-        const packagesResponse = await fetch('http://localhost:8000/api/paquetes/')
+        const packagesResponse = await fetch('http://137.184.35.178:8000/api/paquetes/')
         const packagesData = await packagesResponse.json()
         const rawPackages = packagesData.results || packagesData || []
         const normalizedPackages: Package[] = rawPackages
@@ -132,12 +132,12 @@ export default function CitaPage() {
         setPackages(normalizedPackages)
 
         // Cargar barberos
-        const barbersResponse = await fetch('http://localhost:8000/api/barberos/')
+        const barbersResponse = await fetch('http://137.184.35.178:8000/api/barberos/')
         const barbersData = await barbersResponse.json()
         setBarbers(barbersData.results || barbersData)
 
         // Cargar productos disponibles
-        const productsResponse = await fetch('http://localhost:8000/api/productos/')
+        const productsResponse = await fetch('http://137.184.35.178:8000/api/productos/')
         const productsData = await productsResponse.json()
         const rawProducts = productsData.results || productsData || []
         const normalizedProducts: Product[] = rawProducts
@@ -154,7 +154,7 @@ export default function CitaPage() {
         // Cargar perfil del cliente para verificar si es elegible para promoción
         if (token) {
           try {
-            const profileResponse = await fetch('http://localhost:8000/api/clientes/', {
+            const profileResponse = await fetch('http://137.184.35.178:8000/api/clientes/', {
               headers: {
                 'Authorization': `Bearer ${token}`
               }
@@ -193,7 +193,7 @@ export default function CitaPage() {
 
           const duracion = serviceType === 'service' && selectedService ? selectedService.duracion : 60
           const response = await fetch(
-            `http://localhost:8000/api/citas/horarios-disponibles/?barbero_id=${selectedBarber.id}&fecha=${selectedDate}&duracion=${duracion}`
+            `http://137.184.35.178:8000/api/citas/horarios-disponibles/?barbero_id=${selectedBarber.id}&fecha=${selectedDate}&duracion=${duracion}`
           )
           const data = await response.json()
           
@@ -317,7 +317,7 @@ export default function CitaPage() {
         payload.productos = selectedProducts
       }
 
-      const response = await fetch('http://localhost:8000/api/citas/agendar/', {
+      const response = await fetch('http://137.184.35.178:8000/api/citas/agendar/', {
         method: 'POST',
         headers,
         body: JSON.stringify(payload),
@@ -501,7 +501,7 @@ export default function CitaPage() {
                     {pkg.imagen && (
                       <div className="w-full h-32 mb-4 rounded-lg overflow-hidden">
                         <img
-                          src={pkg.imagen.startsWith('http') ? pkg.imagen : `http://localhost:8000${pkg.imagen}`}
+                          src={pkg.imagen.startsWith('http') ? pkg.imagen : `http://137.184.35.178:8000${pkg.imagen}`}
                           alt={pkg.nombre}
                           className="w-full h-full object-cover"
                         />
@@ -814,3 +814,4 @@ export default function CitaPage() {
     </div>
   )
 }
+

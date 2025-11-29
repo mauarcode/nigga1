@@ -39,7 +39,7 @@ export default function AdvancedStats() {
   const fetchStats = async () => {
     try {
       const token = localStorage.getItem('access_token')
-      const response = await axios.get('http://localhost:8000/api/admin/estadisticas-generales/', {
+      const response = await axios.get('http://137.184.35.178:8000/api/admin/estadisticas-generales/', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -319,4 +319,5 @@ export default function AdvancedStats() {
     </div>
   )
 }
+
 

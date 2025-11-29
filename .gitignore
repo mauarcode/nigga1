@@ -25,12 +25,11 @@ node_modules/
 out/
 .npm
 
-# Archivos de entorno
+# Archivos de entorno (excepto .env.production para el servidor)
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-*.env
 
 # Base de datos local
 db.sqlite3

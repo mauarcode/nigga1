@@ -26,7 +26,7 @@ export default function LoginPage() {
     e.preventDefault()
 
     try {
-      const response = await fetch('http://localhost:8000/api/login/', {
+      const response = await fetch('http://137.184.35.178:8000/api/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export default function LoginPage() {
       }
     } catch (error) {
       console.error('Error de autenticación:', error)
-      alert('Error de conexión. Verifica que el servidor esté corriendo en http://localhost:8000')
+      alert('Error de conexión. Verifica que el servidor esté corriendo en http://137.184.35.178:8000')
     }
   }
 
@@ -232,3 +232,4 @@ export default function LoginPage() {
     </div>
   )
 }
+

@@ -1,8 +1,8 @@
 // Configuración centralizada de URLs de la API
 // Estas variables se configuran en .env.local (desarrollo) o .env.production (producción)
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'
-export const FRONTEND_URL = process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://localhost:3000'
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://137.184.35.178:8000'
+export const FRONTEND_URL = process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://137.184.35.178:3000'
 
 // Helper para construir URLs de la API
 export const apiUrl = (path: string) => `${API_URL}${path.startsWith('/') ? path : `/${path}`}`
@@ -16,4 +16,5 @@ export const mediaUrl = (path: string | null | undefined) => {
   if (path.startsWith('http')) return path
   return `${API_URL}${path.startsWith('/') ? path : `/${path}`}`
 }
+
 

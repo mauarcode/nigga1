@@ -66,7 +66,7 @@ export default function UsersManager() {
     setLoading(true)
     try {
       const token = localStorage.getItem('access_token')
-      const response = await axios.get('http://localhost:8000/api/admin/usuarios/', {
+      const response = await axios.get('http://137.184.35.178:8000/api/admin/usuarios/', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -142,7 +142,7 @@ export default function UsersManager() {
     if (user.rol === 'barbero') {
       try {
         const token = localStorage.getItem('access_token')
-        const barberosResponse = await axios.get('http://localhost:8000/api/barberos/', {
+        const barberosResponse = await axios.get('http://137.184.35.178:8000/api/barberos/', {
           headers: { 'Authorization': `Bearer ${token}` }
         })
         const barberosList = barberosResponse.data.results || barberosResponse.data
@@ -193,7 +193,7 @@ export default function UsersManager() {
         }
 
         await axios.put(
-          `http://localhost:8000/api/admin/usuarios/${currentUser.id}/`,
+          `http://137.184.35.178:8000/api/admin/usuarios/${currentUser.id}/`,
           updateData,
           { headers }
         )
@@ -211,7 +211,7 @@ export default function UsersManager() {
         }
 
         await axios.post(
-          'http://localhost:8000/api/admin/usuarios/',
+          'http://137.184.35.178:8000/api/admin/usuarios/',
           payload,
           { headers }
         )
@@ -235,7 +235,7 @@ export default function UsersManager() {
 
     try {
       const token = localStorage.getItem('access_token')
-      await axios.delete(`http://localhost:8000/api/admin/usuarios/${user.id}/`, {
+      await axios.delete(`http://137.184.35.178:8000/api/admin/usuarios/${user.id}/`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -816,4 +816,5 @@ export default function UsersManager() {
     </div>
   )
 }
+
 
