@@ -106,6 +106,7 @@ class ClientProfile(models.Model):
     class Meta:
         verbose_name = 'Perfil de cliente'
         verbose_name_plural = 'Perfiles de clientes'
+        ordering = ['user__username']
 
 
 class BarberProfile(models.Model):
@@ -700,6 +701,7 @@ class WebsiteContent(models.Model):
     class Meta:
         verbose_name = 'Contenido del sitio web'
         verbose_name_plural = 'Contenido del sitio web'
+        ordering = ['tipo_contenido']
 
 
 class Testimonial(models.Model):
@@ -894,6 +896,7 @@ class SystemSettings(models.Model):
     class Meta:
         verbose_name = 'Configuración del sistema'
         verbose_name_plural = 'Configuración del sistema'
+        ordering = ['tipo_configuracion', 'clave']
 
 
 class PageSection(models.Model):
