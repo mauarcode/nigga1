@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Save, X, Edit, Upload, Trash2, Plus } from 'lucide-react'
@@ -324,7 +324,7 @@ export default function ConfigurationManager() {
       }
 
       // Cargar contenido del sitio web
-      const contentResponse = await fetch('http://137.184.35.178:8000/api/contenido/', { headers })
+      const contentResponse = await fetch('https://barberrock.es/api/contenido/', { headers })
       if (contentResponse.ok) {
         const contentData = await contentResponse.json()
         const contentArray = Array.isArray(contentData) ? contentData : contentData.results || []
@@ -374,14 +374,14 @@ export default function ConfigurationManager() {
       }
 
       // Cargar secciones de página
-      const sectionsResponse = await fetch('http://137.184.35.178:8000/api/secciones/', { headers })
+      const sectionsResponse = await fetch('https://barberrock.es/api/secciones/', { headers })
       if (sectionsResponse.ok) {
         const sectionsData = await sectionsResponse.json()
         setPageSections(Array.isArray(sectionsData) ? sectionsData : sectionsData.results || [])
       }
 
       // Cargar configuración del sistema
-      const settingsResponse = await fetch('http://137.184.35.178:8000/api/configuracion/', { headers })
+      const settingsResponse = await fetch('https://barberrock.es/api/configuracion/', { headers })
       if (settingsResponse.ok) {
         const settingsData = await settingsResponse.json()
         setSystemSettings(Array.isArray(settingsData) ? settingsData : settingsData.results || [])
@@ -421,8 +421,8 @@ export default function ConfigurationManager() {
         }
 
         const url = item.id
-          ? `http://137.184.35.178:8000/api/contenido/${item.id}/`
-          : 'http://137.184.35.178:8000/api/contenido/'
+          ? `https://barberrock.es/api/contenido/${item.id}/`
+          : 'https://barberrock.es/api/contenido/'
         const method = item.id ? 'PATCH' : 'POST'
 
         const response = await fetch(url, {
@@ -454,8 +454,8 @@ export default function ConfigurationManager() {
       } else {
         // Sin cambios en imagen, usar JSON
         const url = item.id
-          ? `http://137.184.35.178:8000/api/contenido/${item.id}/`
-          : 'http://137.184.35.178:8000/api/contenido/'
+          ? `https://barberrock.es/api/contenido/${item.id}/`
+          : 'https://barberrock.es/api/contenido/'
         const method = item.id ? 'PATCH' : 'POST'
 
         const payload: any = {
@@ -502,8 +502,8 @@ export default function ConfigurationManager() {
     try {
       const accessToken = localStorage.getItem('access_token')
       const url = section.id 
-        ? `http://137.184.35.178:8000/api/secciones/${section.id}/`
-        : 'http://137.184.35.178:8000/api/secciones/'
+        ? `https://barberrock.es/api/secciones/${section.id}/`
+        : 'https://barberrock.es/api/secciones/'
       
       const method = section.id ? 'PATCH' : 'POST'
 
@@ -535,7 +535,7 @@ export default function ConfigurationManager() {
 
     try {
       const accessToken = localStorage.getItem('access_token')
-      const response = await fetch(`http://137.184.35.178:8000/api/secciones/${id}/`, {
+      const response = await fetch(`https://barberrock.es/api/secciones/${id}/`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${accessToken}`,
@@ -558,8 +558,8 @@ export default function ConfigurationManager() {
     try {
       const accessToken = localStorage.getItem('access_token')
       const url = setting.id 
-        ? `http://137.184.35.178:8000/api/configuracion/${setting.id}/`
-        : 'http://137.184.35.178:8000/api/configuracion/'
+        ? `https://barberrock.es/api/configuracion/${setting.id}/`
+        : 'https://barberrock.es/api/configuracion/'
       
       const method = setting.id ? 'PATCH' : 'POST'
 
@@ -603,7 +603,7 @@ export default function ConfigurationManager() {
 
     try {
       const accessToken = localStorage.getItem('access_token')
-      const response = await fetch(`http://137.184.35.178:8000/api/contenido/${itemId}/`, {
+      const response = await fetch(`https://barberrock.es/api/contenido/${itemId}/`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${accessToken}`,
@@ -942,7 +942,7 @@ export default function ConfigurationManager() {
                       </button>
                     </div>
                     <img 
-                      src={`http://137.184.35.178:8000${item.imagen}`} 
+                      src={`https://barberrock.es${item.imagen}`} 
                       alt="Imagen" 
                       className="max-w-full max-h-32 object-contain rounded-lg shadow-sm border border-gray-200"
                     />
@@ -1192,7 +1192,7 @@ export default function ConfigurationManager() {
                     {imagePreview || editingItem.imagen ? (
                       <div className="space-y-4">
                         <img
-                          src={imagePreview || `http://137.184.35.178:8000${editingItem.imagen}`}
+                          src={imagePreview || `https://barberrock.es${editingItem.imagen}`}
                           alt="Preview"
                           className="max-h-64 mx-auto rounded"
                         />

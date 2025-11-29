@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Scissors, Edit, Trash2, Plus, X, Save, Eye, EyeOff } from 'lucide-react'
@@ -49,7 +49,7 @@ const [formData, setFormData] = useState<FormData>({
     setLoading(true)
     try {
       const token = localStorage.getItem('access_token')
-      const response = await axios.get('http://137.184.35.178:8000/api/admin/servicios/', {
+      const response = await axios.get('https://barberrock.es/api/admin/servicios/', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -129,7 +129,7 @@ const [formData, setFormData] = useState<FormData>({
       if (isEditing && currentService) {
         // Actualizar servicio existente
         await axios.put(
-          `http://137.184.35.178:8000/api/admin/servicios/${currentService.id}/`,
+          `https://barberrock.es/api/admin/servicios/${currentService.id}/`,
           formData,
           { headers }
         )
@@ -137,7 +137,7 @@ const [formData, setFormData] = useState<FormData>({
       } else {
         // Crear nuevo servicio
         await axios.post(
-          'http://137.184.35.178:8000/api/admin/servicios/',
+          'https://barberrock.es/api/admin/servicios/',
           formData,
           { headers }
         )
@@ -161,7 +161,7 @@ const [formData, setFormData] = useState<FormData>({
 
     try {
       const token = localStorage.getItem('access_token')
-      await axios.delete(`http://137.184.35.178:8000/api/admin/servicios/${service.id}/`, {
+      await axios.delete(`https://barberrock.es/api/admin/servicios/${service.id}/`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

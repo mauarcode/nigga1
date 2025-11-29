@@ -1,8 +1,8 @@
-// Configuración centralizada de URLs de la API
+﻿// Configuración centralizada de URLs de la API
 // Estas variables se configuran en .env.local (desarrollo) o .env.production (producción)
 
-export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://137.184.35.178:8000'
-export const FRONTEND_URL = process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://137.184.35.178:3000'
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://barberrock.es'
+export const FRONTEND_URL = process.env.NEXT_PUBLIC_FRONTEND_URL || 'https://barberrock.es'
 
 // Helper para construir URLs de la API
 export const apiUrl = (path: string) => `${API_URL}${path.startsWith('/') ? path : `/${path}`}`

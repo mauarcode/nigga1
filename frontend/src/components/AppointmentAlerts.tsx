@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Bell, MessageCircle, Clock, User, Scissors, X, CheckCircle } from 'lucide-react'
@@ -38,7 +38,7 @@ export default function AppointmentAlerts() {
         return
       }
 
-      const response = await fetch('http://137.184.35.178:8000/api/admin/alertas/', {
+      const response = await fetch('https://barberrock.es/api/admin/alertas/', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -73,7 +73,7 @@ export default function AppointmentAlerts() {
     // Marcar alerta como enviada
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://137.184.35.178:8000/api/admin/alertas/${alertItem.id}/enviar/`, {
+      const response = await fetch(`https://barberrock.es/api/admin/alertas/${alertItem.id}/enviar/`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useEffect, useState } from 'react'
 import { Package, Plus, Edit, Trash2, Save, X, Image as ImageIcon, Upload, ToggleLeft, ToggleRight, Scissors, ShoppingBag } from 'lucide-react'
@@ -78,7 +78,7 @@ export default function PackagesManager() {
   const fetchPackages = async () => {
     setLoading(true)
     try {
-      const response = await axios.get('http://137.184.35.178:8000/api/paquetes/', {
+      const response = await axios.get('https://barberrock.es/api/paquetes/', {
         headers: getAuthHeaders() || undefined,
       })
       const data = Array.isArray(response.data) ? response.data : response.data?.results || []
@@ -95,7 +95,7 @@ export default function PackagesManager() {
 
   const fetchServices = async () => {
     try {
-      const response = await axios.get('http://137.184.35.178:8000/api/servicios/')
+      const response = await axios.get('https://barberrock.es/api/servicios/')
       const data = Array.isArray(response.data) ? response.data : response.data?.results || []
       setServices(data.filter((s: Service) => s.activo !== false))
     } catch (error) {
@@ -105,7 +105,7 @@ export default function PackagesManager() {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('http://137.184.35.178:8000/api/productos/')
+      const response = await axios.get('https://barberrock.es/api/productos/')
       const data = Array.isArray(response.data) ? response.data : response.data?.results || []
       setProducts(data.filter((p: Product) => p.activo !== false))
     } catch (error) {
@@ -145,7 +145,7 @@ export default function PackagesManager() {
       producto_ids: pkg.productos.map(p => p.id),
     })
     if (pkg.imagen) {
-      setPreviewUrl(`http://137.184.35.178:8000${pkg.imagen}`)
+      setPreviewUrl(`https://barberrock.es${pkg.imagen}`)
     }
     setShowModal(true)
   }
@@ -191,7 +191,7 @@ export default function PackagesManager() {
       }
 
       if (isEditing && currentPackage) {
-        await axios.patch(`http://137.184.35.178:8000/api/paquetes/${currentPackage.id}/`, payload, {
+        await axios.patch(`https://barberrock.es/api/paquetes/${currentPackage.id}/`, payload, {
           headers: {
             ...authHeaders,
             'Content-Type': 'multipart/form-data',
@@ -199,7 +199,7 @@ export default function PackagesManager() {
         })
         alert('Paquete actualizado correctamente.')
       } else {
-        await axios.post('http://137.184.35.178:8000/api/paquetes/', payload, {
+        await axios.post('https://barberrock.es/api/paquetes/', payload, {
           headers: {
             ...authHeaders,
             'Content-Type': 'multipart/form-data',
@@ -229,7 +229,7 @@ export default function PackagesManager() {
       const authHeaders = getAuthHeaders()
       if (!authHeaders) return
 
-      await axios.delete(`http://137.184.35.178:8000/api/paquetes/${id}/`, { headers: authHeaders })
+      await axios.delete(`https://barberrock.es/api/paquetes/${id}/`, { headers: authHeaders })
       alert('Paquete eliminado correctamente.')
       fetchPackages()
     } catch (error: any) {
@@ -248,7 +248,7 @@ export default function PackagesManager() {
       if (!authHeaders) return
 
       await axios.patch(
-        `http://137.184.35.178:8000/api/paquetes/${pkg.id}/`,
+        `https://barberrock.es/api/paquetes/${pkg.id}/`,
         { activo: !pkg.activo },
         { headers: authHeaders }
       )
@@ -313,7 +313,7 @@ export default function PackagesManager() {
 
                   {pkg.imagen && (
                     <img
-                      src={`http://137.184.35.178:8000${pkg.imagen}`}
+                      src={`https://barberrock.es${pkg.imagen}`}
                       alt={pkg.nombre}
                       className="w-full h-48 object-cover rounded-lg mb-4"
                     />

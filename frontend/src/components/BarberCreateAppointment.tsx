@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Calendar, User, Scissors, Clock, Save, X, Plus, Phone, Mail } from 'lucide-react'
@@ -75,7 +75,7 @@ export default function BarberCreateAppointment({ onCreated }: BarberCreateAppoi
       const userId = localStorage.getItem('user_id')
 
       // Cargar servicios
-      const servicesRes = await fetch('http://137.184.35.178:8000/api/servicios/', {
+      const servicesRes = await fetch('https://barberrock.es/api/servicios/', {
         headers: { Authorization: `Bearer ${token}` },
       })
       if (servicesRes.ok) {
@@ -84,7 +84,7 @@ export default function BarberCreateAppointment({ onCreated }: BarberCreateAppoi
       }
 
       // Cargar productos
-      const productsRes = await fetch('http://137.184.35.178:8000/api/productos/', {
+      const productsRes = await fetch('https://barberrock.es/api/productos/', {
         headers: { Authorization: `Bearer ${token}` },
       })
       if (productsRes.ok) {
@@ -99,7 +99,7 @@ export default function BarberCreateAppointment({ onCreated }: BarberCreateAppoi
       }
 
       // Cargar clientes
-      const clientsRes = await fetch('http://137.184.35.178:8000/api/clientes/', {
+      const clientsRes = await fetch('https://barberrock.es/api/clientes/', {
         headers: { Authorization: `Bearer ${token}` },
       })
       if (clientsRes.ok) {
@@ -109,7 +109,7 @@ export default function BarberCreateAppointment({ onCreated }: BarberCreateAppoi
 
       // Obtener perfil de barbero actual
       if (userId) {
-        const barbersRes = await fetch('http://137.184.35.178:8000/api/barberos/')
+        const barbersRes = await fetch('https://barberrock.es/api/barberos/')
         if (barbersRes.ok) {
           const barbersData = await barbersRes.json()
           const barbersList = Array.isArray(barbersData) ? barbersData : barbersData.results || []
@@ -187,7 +187,7 @@ export default function BarberCreateAppointment({ onCreated }: BarberCreateAppoi
         headers.Authorization = `Bearer ${token}`
       }
 
-      const response = await fetch('http://137.184.35.178:8000/api/citas/agendar/', {
+      const response = await fetch('https://barberrock.es/api/citas/agendar/', {
         method: 'POST',
         headers,
         body: JSON.stringify(payload),

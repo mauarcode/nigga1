@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { X, ChevronLeft, ChevronRight, Play } from 'lucide-react'
@@ -28,7 +28,7 @@ export default function PublicGallery() {
   const loadGalleryItems = async () => {
     try {
       setLoading(true)
-      const response = await fetch('http://137.184.35.178:8000/api/galeria/')
+      const response = await fetch('https://barberrock.es/api/galeria/')
       
       if (response.ok) {
         const data = await response.json()
@@ -119,7 +119,7 @@ export default function PublicGallery() {
             {item.imagen ? (
               <div className="relative">
                 <img
-                  src={`http://137.184.35.178:8000${item.imagen}`}
+                  src={`https://barberrock.es${item.imagen}`}
                   alt={item.titulo}
                   className="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
                 />
@@ -182,7 +182,7 @@ export default function PublicGallery() {
             {selectedItem.imagen ? (
               <div className="relative">
                 <img
-                  src={`http://137.184.35.178:8000${selectedItem.imagen}`}
+                  src={`https://barberrock.es${selectedItem.imagen}`}
                   alt={selectedItem.titulo}
                   className="w-full h-auto max-h-[80vh] object-contain mx-auto"
                 />

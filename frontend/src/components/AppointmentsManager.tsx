@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Calendar, Clock, User, Scissors, CheckCircle, XCircle, Eye, Search } from 'lucide-react'
@@ -44,7 +44,7 @@ export default function AppointmentsManager() {
         return
       }
 
-      const response = await fetch('http://137.184.35.178:8000/api/citas/', {
+      const response = await fetch('https://barberrock.es/api/citas/', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -117,7 +117,7 @@ export default function AppointmentsManager() {
         return
       }
 
-      const response = await fetch(`http://137.184.35.178:8000/api/citas/${id}/`, {
+      const response = await fetch(`https://barberrock.es/api/citas/${id}/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',

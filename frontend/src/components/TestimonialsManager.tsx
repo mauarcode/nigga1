@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { Star, Edit, Trash2, Eye, EyeOff, Plus, X, Save } from 'lucide-react'
@@ -39,7 +39,7 @@ const [createForm, setCreateForm] = useState({
   const loadTestimonials = async () => {
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch('http://137.184.35.178:8000/api/testimonios/', {
+      const response = await fetch('https://barberrock.es/api/testimonios/', {
         headers: token ? { Authorization: `Bearer ${token}` } : undefined,
       })
       if (response.ok) {
@@ -70,7 +70,7 @@ const [createForm, setCreateForm] = useState({
   const handleSave = async (id: number) => {
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://137.184.35.178:8000/api/testimonios/${id}/`, {
+      const response = await fetch(`https://barberrock.es/api/testimonios/${id}/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -93,7 +93,7 @@ const [createForm, setCreateForm] = useState({
   const toggleVisibility = async (id: number, currentActivo: boolean) => {
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://137.184.35.178:8000/api/testimonios/${id}/`, {
+      const response = await fetch(`https://barberrock.es/api/testimonios/${id}/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ const [createForm, setCreateForm] = useState({
 
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://137.184.35.178:8000/api/testimonios/${id}/`, {
+      const response = await fetch(`https://barberrock.es/api/testimonios/${id}/`, {
         method: 'DELETE',
         headers: token ? { Authorization: `Bearer ${token}` } : undefined,
       })
@@ -153,7 +153,7 @@ const [createForm, setCreateForm] = useState({
 
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch('http://137.184.35.178:8000/api/testimonios/', {
+      const response = await fetch('https://barberrock.es/api/testimonios/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

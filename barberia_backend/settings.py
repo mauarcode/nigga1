@@ -18,13 +18,15 @@ SECRET_KEY = 'django-insecure-production-key-change-this-in-real-production-x7k9
 DEBUG = False
 
 ALLOWED_HOSTS = [
+    'barberrock.es',
+    'www.barberrock.es',
     '137.184.35.178',
     'localhost',
     '127.0.0.1',
 ]
 
 # URL del frontend para generar enlaces (QR codes de barberos, etc.)
-FRONTEND_URL = "http://137.184.35.178:3000"
+FRONTEND_URL = "https://barberrock.es"
 
 # Application definition
 INSTALLED_APPS = [
@@ -110,6 +112,8 @@ CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
 
 CORS_ALLOWED_ORIGINS = [
+    "https://barberrock.es",
+    "https://www.barberrock.es",
     "http://137.184.35.178:3000",
     "http://137.184.35.178",
 ]

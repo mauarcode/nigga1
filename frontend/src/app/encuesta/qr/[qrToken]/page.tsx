@@ -31,7 +31,7 @@ export default function QRScanPage() {
 
   const loadBarberInfo = async () => {
     try {
-      const response = await fetch(`http://137.184.35.178:8000/api/qr/${qrToken}/`)
+      const response = await fetch(`https://barberrock.es/api/qr/${qrToken}/`)
       if (!response.ok) {
         throw new Error('Código QR inválido')
       }
@@ -47,7 +47,7 @@ export default function QRScanPage() {
   const loadPendingSurvey = async () => {
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://137.184.35.178:8000/api/qr/${qrToken}/encuesta/`, {
+      const response = await fetch(`https://barberrock.es/api/qr/${qrToken}/encuesta/`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }

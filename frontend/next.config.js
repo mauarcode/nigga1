@@ -3,6 +3,16 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
+        protocol: 'https',
+        hostname: 'barberrock.es',
+        pathname: '/media/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.barberrock.es',
+        pathname: '/media/**',
+      },
+      {
         protocol: 'http',
         hostname: '137.184.35.178',
         port: '8000',

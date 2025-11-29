@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
@@ -93,7 +93,7 @@ export default function BarberoDashboard() {
 
       // Cargar perfil del barbero para obtener QR
       try {
-        const barberosResponse = await fetch('http://137.184.35.178:8000/api/barberos/', {
+        const barberosResponse = await fetch('https://barberrock.es/api/barberos/', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -114,7 +114,7 @@ export default function BarberoDashboard() {
         console.error('Error al cargar perfil del barbero:', error)
       }
 
-      const appointmentsResponse = await fetch('http://137.184.35.178:8000/api/citas/', {
+      const appointmentsResponse = await fetch('https://barberrock.es/api/citas/', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -124,7 +124,7 @@ export default function BarberoDashboard() {
       setAppointments(appointmentsList)
 
       try {
-        const statsResponse = await fetch('http://137.184.35.178:8000/api/estadisticas/', {
+        const statsResponse = await fetch('https://barberrock.es/api/estadisticas/', {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -182,7 +182,7 @@ export default function BarberoDashboard() {
   const handleMarkAsCompleted = async (appointmentId: number) => {
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://137.184.35.178:8000/api/citas/${appointmentId}/`, {
+      const response = await fetch(`https://barberrock.es/api/citas/${appointmentId}/`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -216,7 +216,7 @@ export default function BarberoDashboard() {
 
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://137.184.35.178:8000/api/citas/${appointmentId}/`, {
+      const response = await fetch(`https://barberrock.es/api/citas/${appointmentId}/`, {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${token}`,

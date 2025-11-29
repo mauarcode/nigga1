@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -26,7 +26,7 @@ export default function LoginPage() {
     e.preventDefault()
 
     try {
-      const response = await fetch('http://137.184.35.178:8000/api/login/', {
+      const response = await fetch('https://barberrock.es/api/login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ export default function LoginPage() {
       }
     } catch (error) {
       console.error('Error de autenticación:', error)
-      alert('Error de conexión. Verifica que el servidor esté corriendo en http://137.184.35.178:8000')
+      alert('Error de conexión. Verifica que el servidor esté corriendo en https://barberrock.es')
     }
   }
 
