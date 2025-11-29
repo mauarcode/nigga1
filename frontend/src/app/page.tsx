@@ -221,7 +221,8 @@ export default function HomePage() {
   const locationAddress =
     contentMap['ubicacion_direccion']?.contenido ||
     contentMap['contacto_direccion']?.contenido ||
-    'Av. Paseo de la Reforma 123, Ciudad de México'
+    contentMap['direccion']?.contenido ||
+    'Dirección no configurada'
   
   // Log para depuración
   console.log('Dirección cargada:', {
@@ -626,11 +627,11 @@ export default function HomePage() {
       </section>
 
       {/* Servicios */}
-      <section id="servicios" className="py-16" style={{ backgroundColor: servicesBackground }}>
+      <section id="servicios" className="py-12 md:py-16" style={{ backgroundColor: servicesBackground }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Nuestros Servicios</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">Nuestros Servicios</h2>
+            <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto">
               {contentMap['servicios_descripcion']?.contenido || 'Ofrecemos una amplia gama de servicios de barbería para satisfacer todas tus necesidades de cuidado personal.'}
             </p>
           </div>
@@ -680,16 +681,16 @@ export default function HomePage() {
 
       {/* Paquetes */}
       {packages.length > 0 && (
-        <section id="paquetes" className="py-16 bg-gray-50">
+        <section id="paquetes" className="py-12 md:py-16 bg-gray-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">Nuestros Paquetes</h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <div className="text-center mb-8 md:mb-12">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">Nuestros Paquetes</h2>
+              <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto">
                 Combina servicios y productos con nuestras ofertas especiales
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
               {packages.map((pkg) => (
                 <div key={pkg.id} className="card hover:shadow-lg transition-shadow">
                   <div className="relative mb-4">
@@ -742,40 +743,40 @@ export default function HomePage() {
       )}
 
       {/* Productos */}
-      <section id="productos" className="py-16" style={{ backgroundColor: productosBackground }}>
+      <section id="productos" className="py-12 md:py-16" style={{ backgroundColor: productosBackground }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">
               {contentMap['catalogo_titulo']?.contenido || 'Catálogo de Productos'}
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-base md:text-xl text-gray-600 max-w-3xl mx-auto">
               {contentMap['catalogo_descripcion']?.contenido ||
                 'Complementa tu servicio con nuestra selección de productos profesionales.'}
             </p>
           </div>
 
           {products.length === 0 ? (
-            <div className="text-center py-12">
-              <Package className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-600">Próximamente encontrarás nuestros productos destacados aquí.</p>
+            <div className="text-center py-8 md:py-12">
+              <Package className="w-10 h-10 md:w-12 md:h-12 text-gray-400 mx-auto mb-4" />
+              <p className="text-gray-600 text-sm md:text-base">Próximamente encontrarás nuestros productos destacados aquí.</p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
               {products.map((product) => (
                 <div key={product.id} className="border rounded-xl shadow-sm hover:shadow-md transition-shadow bg-white">
                   {product.imagen ? (
                     <img
                       src={product.imagen.startsWith('http') ? product.imagen : `https://barberrock.es${product.imagen}`}
                       alt={product.nombre}
-                      className="w-full h-48 object-cover rounded-t-xl"
+                      className="w-full h-40 sm:h-48 object-cover rounded-t-xl"
                     />
                   ) : (
-                    <div className="w-full h-48 bg-gray-100 rounded-t-xl flex items-center justify-center text-gray-400">
-                      <Package className="w-12 h-12" />
+                    <div className="w-full h-40 sm:h-48 bg-gray-100 rounded-t-xl flex items-center justify-center text-gray-400">
+                      <Package className="w-10 h-10 md:w-12 md:h-12" />
                     </div>
                   )}
-                  <div className="p-6 space-y-3">
-                    <h3 className="text-xl font-semibold text-gray-900">{product.nombre}</h3>
+                  <div className="p-4 md:p-6 space-y-2 md:space-y-3">
+                    <h3 className="text-lg md:text-xl font-semibold text-gray-900">{product.nombre}</h3>
                     <p className="text-gray-600 text-sm min-h-[3rem]">
                       {product.descripcion || 'Sin descripción disponible.'}
                     </p>
@@ -789,40 +790,39 @@ export default function HomePage() {
       </section>
 
       {/* Establecimiento */}
-      <section id="establecimiento" className="py-16" style={{ backgroundColor: establecimientoBackground }}>
+      <section id="establecimiento" className="py-12 md:py-16" style={{ backgroundColor: establecimientoBackground }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">{contentMap['establecimiento_titulo']?.contenido || 'Nuestro Establecimiento'}</h2>
-              <p className="text-lg text-gray-600 mb-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div className="text-center lg:text-left">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 md:mb-6">{contentMap['establecimiento_titulo']?.contenido || 'Nuestro Establecimiento'}</h2>
+              <p className="text-base md:text-lg text-gray-600 mb-4 md:mb-6">
                 {contentMap['establecimiento_descripcion']?.contenido ||
                   'Desde hace más de 10 años, hemos sido el referente en servicios de barbería en la ciudad. Nuestro compromiso es brindar una experiencia excepcional a cada cliente que cruza nuestras puertas.'}
               </p>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8">
                 {contentMap['descripcion_general']?.contenido ||
                   'Contamos con instalaciones modernas, equipos de última generación y un equipo de profesionales altamente capacitados para ofrecerte el mejor servicio posible.'}
               </p>
-              <div className="grid grid-cols-2 gap-6">
-                <div className="flex items-center">
-                  <Award className="w-8 h-8 text-primary-600 mr-3" />
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                <div className="flex items-center justify-center lg:justify-start">
+                  <Award className="w-6 h-6 md:w-8 md:h-8 text-primary-600 mr-2 md:mr-3" />
                   <div>
-                    <h4 className="font-semibold">10+ Años</h4>
-                    <p className="text-gray-600">De experiencia</p>
+                    <h4 className="font-semibold text-sm md:text-base">10+ Años</h4>
+                    <p className="text-gray-600 text-xs md:text-sm">De experiencia</p>
                   </div>
                 </div>
-                <div className="flex items-center">
-                  <Users className="w-8 h-8 text-primary-600 mr-3" />
+                <div className="flex items-center justify-center lg:justify-start">
+                  <Users className="w-6 h-6 md:w-8 md:h-8 text-primary-600 mr-2 md:mr-3" />
                   <div>
-                    <h4 className="font-semibold">1000+ Clientes</h4>
-                    <p className="text-gray-600">Satisfechos</p>
+                    <h4 className="font-semibold text-sm md:text-base">1000+ Clientes</h4>
+                    <p className="text-gray-600 text-xs md:text-sm">Satisfechos</p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative mt-6 lg:mt-0">
               <div className="aspect-w-16 aspect-h-9 bg-gray-200 rounded-lg overflow-hidden">
                 {contentMap['establecimiento_imagen']?.imagen ? (
-                  // Usamos <img> para evitar restricciones de dominios en Next/Image
                   <img
                     src={
                       contentMap['establecimiento_imagen'].imagen.startsWith('http')
@@ -830,22 +830,22 @@ export default function HomePage() {
                         : `https://barberrock.es${contentMap['establecimiento_imagen'].imagen}`
                     }
                     alt="Establecimiento"
-                    className="w-full h-96 object-cover rounded-lg"
+                    className="w-full h-64 sm:h-80 md:h-96 object-cover rounded-lg"
                     onError={(e) => {
                       console.error('Error al cargar imagen del establecimiento:', contentMap['establecimiento_imagen']?.imagen)
                       e.currentTarget.style.display = 'none'
                       const parent = e.currentTarget.parentElement
                       if (parent) {
                         const placeholder = document.createElement('div')
-                        placeholder.className = 'w-full h-96 bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg flex items-center justify-center'
-                        placeholder.innerHTML = '<p class="text-primary-600 text-lg font-medium">Error al cargar imagen</p>'
+                        placeholder.className = 'w-full h-64 sm:h-80 md:h-96 bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg flex items-center justify-center'
+                        placeholder.innerHTML = '<p class="text-primary-600 text-base md:text-lg font-medium">Error al cargar imagen</p>'
                         parent.appendChild(placeholder)
                       }
                     }}
                   />
                 ) : (
-                  <div className="w-full h-96 bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg flex items-center justify-center">
-                    <p className="text-primary-600 text-lg font-medium">Imagen del establecimiento</p>
+                  <div className="w-full h-64 sm:h-80 md:h-96 bg-gradient-to-br from-primary-100 to-primary-200 rounded-lg flex items-center justify-center">
+                    <p className="text-primary-600 text-base md:text-lg font-medium">Imagen del establecimiento</p>
                   </div>
                 )}
               </div>
@@ -931,17 +931,17 @@ export default function HomePage() {
       )}
 
       {/* Galería */}
-      <section id="galeria" className="py-16" style={{ backgroundColor: galeriaBackground }}>
+      <section id="galeria" className="py-12 md:py-16" style={{ backgroundColor: galeriaBackground }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Galería de Trabajos</h2>
-            <p className="text-xl text-gray-600">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">Galería de Trabajos</h2>
+            <p className="text-base md:text-xl text-gray-600">
               {contentMap['galeria_descripcion']?.contenido || 'Algunos ejemplos de nuestro trabajo profesional'}
             </p>
           </div>
 
           {gallery.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4">
               {gallery.map((item) => (
                 <div key={item.id} className="relative aspect-square bg-gray-200 rounded-lg overflow-hidden">
                   {item.imagen ? (
@@ -981,76 +981,70 @@ export default function HomePage() {
       </section>
 
       {/* Testimonios */}
-      <section className="py-16" style={{ backgroundColor: testimoniosBackground }}>
+      <section className="py-12 md:py-16" style={{ backgroundColor: testimoniosBackground }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Lo que dicen nuestros clientes</h2>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">Lo que dicen nuestros clientes</h2>
           </div>
 
           {loading ? (
-            <div className="text-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto"></div>
-              <p className="mt-4 text-gray-600">Cargando testimonios...</p>
+            <div className="text-center py-8 md:py-12">
+              <div className="animate-spin rounded-full h-10 w-10 md:h-12 md:w-12 border-b-2 border-primary-600 mx-auto"></div>
+              <p className="mt-4 text-gray-600 text-sm md:text-base">Cargando testimonios...</p>
             </div>
           ) : testimonials.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
               {testimonials.map((testimonio) => (
-                <div key={testimonio.id} className="card">
-                  <div className="flex mb-4">
+                <div key={testimonio.id} className="card p-4 md:p-6">
+                  <div className="flex mb-3 md:mb-4">
                     {Array.from({ length: testimonio.calificacion }).map((_, j) => (
-                      <Star key={j} className="w-5 h-5 text-yellow-400 fill-current" />
+                      <Star key={j} className="w-4 h-4 md:w-5 md:h-5 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <p className="text-gray-600 mb-4 italic">"{testimonio.testimonio}"</p>
-                  <p className="font-semibold">{testimonio.cliente_nombre}</p>
+                  <p className="text-gray-600 mb-3 md:mb-4 italic text-sm md:text-base">"{testimonio.testimonio}"</p>
+                  <p className="font-semibold text-sm md:text-base">{testimonio.cliente_nombre}</p>
                   {testimonio.servicio_recibido && (
-                    <p className="text-sm text-gray-500 mt-2">Servicio: {testimonio.servicio_recibido}</p>
+                    <p className="text-xs md:text-sm text-gray-500 mt-2">Servicio: {testimonio.servicio_recibido}</p>
                   )}
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
-              <p className="text-gray-600">No hay testimonios disponibles en este momento.</p>
+            <div className="text-center py-8 md:py-12">
+              <p className="text-gray-600 text-sm md:text-base">No hay testimonios disponibles en este momento.</p>
             </div>
           )}
         </div>
       </section>
 
       {/* Ubicación */}
-      <section id="ubicacion" className="py-16" style={{ backgroundColor: locationBackground }}>
+      <section id="ubicacion" className="py-12 md:py-16" style={{ backgroundColor: locationBackground }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">{locationTitle}</h2>
-            <p className="text-lg text-gray-600">{locationDescription}</p>
+          <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">{locationTitle}</h2>
+            <p className="text-base md:text-lg text-gray-600">{locationDescription}</p>
           </div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 flex flex-col justify-center">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Dirección del local</h3>
-              <p className="text-gray-600 whitespace-pre-line leading-relaxed">{locationAddress}</p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-stretch">
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 md:p-6 flex flex-col justify-center order-2 lg:order-1">
+              <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3 md:mb-4">📍 Dirección</h3>
+              <p className="text-gray-600 whitespace-pre-line leading-relaxed text-sm md:text-base">{locationAddress}</p>
             </div>
-            <div className="relative overflow-hidden rounded-xl shadow-lg bg-white border border-gray-200">
+            <div className="relative overflow-hidden rounded-xl shadow-lg bg-white border border-gray-200 order-1 lg:order-2">
               {locationMapUrl ? (
                 <iframe
                   title="Ubicación BarberRock"
                   src={locationMapUrl}
-                  className="w-full h-96"
+                  className="w-full h-64 sm:h-80 md:h-96"
                   allowFullScreen
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                   onError={() => console.error('Error al cargar el iframe del mapa')}
                 />
               ) : (
-                <div className="w-full h-96 flex flex-col items-center justify-center text-center px-6">
-                  <p className="text-gray-600 mb-2">
-                    Agrega el enlace embebido de Google Maps en el panel de administración para mostrar el mapa
-                    interactivo de tu barbería.
+                <div className="w-full h-64 sm:h-80 md:h-96 flex flex-col items-center justify-center text-center px-4 md:px-6">
+                  <p className="text-gray-600 mb-2 text-sm md:text-base">
+                    Agrega el enlace embebido de Google Maps en el panel de administración.
                   </p>
-                  {contentMap['ubicacion_maps_url']?.contenido && (
-                    <p className="text-sm text-red-600 mt-2">
-                      ⚠️ Se detectó contenido pero no se pudo extraer la URL. Verifica la consola del navegador (F12) para más detalles.
-                    </p>
-                  )}
                 </div>
               )}
             </div>
@@ -1065,48 +1059,48 @@ export default function HomePage() {
         style={{ backgroundColor: contactBackgroundColor }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-white mb-4">¿Listo para tu próximo corte?</h2>
-            <p className="text-xl text-primary-100">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4">¿Listo para tu próximo corte?</h2>
+            <p className="text-lg md:text-xl text-primary-100">
               Contáctanos hoy mismo y reserva tu cita
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 text-center">
             <div
-              className="rounded-lg p-6"
+              className="rounded-lg p-4 md:p-6"
               style={{ backgroundColor: hexToRGBA(contactCardColor, 0.15) }}
             >
-              <Phone className="w-12 h-12 text-white mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-white mb-2">Teléfono</h3>
-              <p className="text-primary-100">{contentMap['contacto_telefono']?.contenido || '(555) 123-4567'}</p>
+              <Phone className="w-10 h-10 md:w-12 md:h-12 text-white mx-auto mb-3 md:mb-4" />
+              <h3 className="text-lg md:text-xl font-semibold text-white mb-2">Teléfono</h3>
+              <p className="text-primary-100 text-sm md:text-base">{contentMap['contacto_telefono']?.contenido || '(555) 123-4567'}</p>
             </div>
             <div
-              className="rounded-lg p-6"
+              className="rounded-lg p-4 md:p-6"
               style={{ backgroundColor: hexToRGBA(contactCardColor, 0.15) }}
             >
-              <MapPin className="w-12 h-12 text-white mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-white mb-2">Ubicación</h3>
-              <p className="text-primary-100">
-                {contentMap['contacto_direccion']?.contenido || 'Av. Paseo de la Reforma 123, Ciudad de México'}
+              <MapPin className="w-10 h-10 md:w-12 md:h-12 text-white mx-auto mb-3 md:mb-4" />
+              <h3 className="text-lg md:text-xl font-semibold text-white mb-2">Ubicación</h3>
+              <p className="text-primary-100 text-sm md:text-base">
+                {locationAddress}
               </p>
             </div>
             <div
-              className="rounded-lg p-6"
+              className="rounded-lg p-4 md:p-6 sm:col-span-2 md:col-span-1"
               style={{ backgroundColor: hexToRGBA(contactCardColor, 0.15) }}
             >
-              <Clock className="w-12 h-12 text-white mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-white mb-2">Horarios</h3>
-              <p className="text-primary-100 whitespace-pre-line">
-                {contentMap['horarios_laborales']?.contenido || 'Lun-Sáb: 9:00-19:00\nDom: 10:00-18:00'}
+              <Clock className="w-10 h-10 md:w-12 md:h-12 text-white mx-auto mb-3 md:mb-4" />
+              <h3 className="text-lg md:text-xl font-semibold text-white mb-2">Horarios</h3>
+              <p className="text-primary-100 whitespace-pre-line text-sm md:text-base">
+                {contentMap['horarios_laborales']?.contenido || contentMap['horario_atencion']?.contenido || 'Lun-Sáb: 9:00-19:00'}
               </p>
             </div>
           </div>
 
-          <div className="text-center mt-12">
+          <div className="text-center mt-8 md:mt-12">
             <Link
               href="/cita"
-              className="font-bold py-3 px-8 rounded-lg text-lg transition-colors inline-flex items-center"
+              className="font-bold py-3 px-6 md:px-8 rounded-lg text-base md:text-lg transition-colors inline-flex items-center"
               style={{ backgroundColor: '#ffffff', color: contactBackgroundColor }}
             >
               <Calendar className="w-5 h-5 mr-2" />
