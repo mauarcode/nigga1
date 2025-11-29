@@ -28,6 +28,7 @@ interface WebsiteContentItem {
   tipo_contenido: string
   contenido: string
   imagen?: string | null
+  activo?: boolean
 }
 
 interface GalleryItem {
