@@ -114,9 +114,9 @@ export default function HomePage() {
         let nextUrl: string | null = 'http://137.184.35.178:8000/api/contenido/'
         
         while (nextUrl) {
-          const contentResponse = await fetch(nextUrl, { cache: 'no-store' })
-          const contentDataRaw = await contentResponse.json()
-          const pageData = contentDataRaw.results || contentDataRaw || []
+          const contentResponse: Response = await fetch(nextUrl, { cache: 'no-store' })
+          const contentDataRaw: any = await contentResponse.json()
+          const pageData: WebsiteContentItem[] = contentDataRaw.results || contentDataRaw || []
           allContentData = [...allContentData, ...pageData]
           nextUrl = contentDataRaw.next || null
         }
