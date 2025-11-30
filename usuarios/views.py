@@ -7,6 +7,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from datetime import datetime, timedelta
+import uuid
 from .models import (
     CustomUser,
     ClientProfile,
@@ -1143,16 +1144,38 @@ def admin_users_management(request, user_id=None):
         data = request.data
         try:
             fecha_nacimiento = data.get('fecha_nacimiento') or None
+            rol = data.get('rol', 'cliente')
             user = CustomUser.objects.create_user(
                 username=data['username'],
                 email=data['email'],
                 password=data['password'],
                 first_name=data.get('first_name', ''),
                 last_name=data.get('last_name', ''),
-                rol=data.get('rol', 'cliente'),
+                rol=rol,
                 telefono=data.get('telefono', ''),
                 fecha_nacimiento=fecha_nacimiento
             )
+            
+            # Crear perfil automáticamente según el rol
+            if rol == 'barbero':
+                BarberProfile.objects.get_or_create(
+                    user=user,
+                    defaults={
+                        'especialidad': 'Cortes clásicos y modernos',
+                        'biografia': f'Barbero profesional - {user.first_name} {user.last_name}'.strip(),
+                        'activo': True,
+                        'qr_token': str(uuid.uuid4())
+                    }
+                )
+            elif rol == 'cliente':
+                ClientProfile.objects.get_or_create(
+                    user=user,
+                    defaults={
+                        'cortes_realizados': 0,
+                        'cortes_para_promocion': 5,
+                    }
+                )
+            
             return Response({'message': 'Usuario creado correctamente', 'id': user.id}, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
@@ -1165,6 +1188,7 @@ def admin_users_management(request, user_id=None):
         try:
             user = CustomUser.objects.get(id=user_id)
             data = request.data
+            old_rol = user.rol
 
             # Actualizar campos permitidos
             if 'first_name' in data:
@@ -1184,6 +1208,25 @@ def admin_users_management(request, user_id=None):
                 user.fecha_nacimiento = value or None
 
             user.save()
+            
+            # Si cambió a rol barbero, crear perfil si no existe
+            new_rol = data.get('rol', old_rol)
+            if new_rol == 'barbero' and not BarberProfile.objects.filter(user=user).exists():
+                BarberProfile.objects.create(
+                    user=user,
+                    especialidad='Cortes clásicos y modernos',
+                    biografia=f'Barbero profesional - {user.first_name} {user.last_name}'.strip(),
+                    activo=True,
+                    qr_token=str(uuid.uuid4())
+                )
+            # Si cambió a rol cliente, crear perfil si no existe
+            elif new_rol == 'cliente' and not ClientProfile.objects.filter(user=user).exists():
+                ClientProfile.objects.create(
+                    user=user,
+                    cortes_realizados=0,
+                    cortes_para_promocion=5,
+                )
+            
             return Response({'message': 'Usuario actualizado correctamente'})
         except CustomUser.DoesNotExist:
             return Response({'error': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
