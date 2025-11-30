@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useMemo, useState, useRef } from 'react'
-import { useParams } from 'next/navigation'
-import { Loader2, Send } from 'lucide-react'
+import { useParams, useRouter } from 'next/navigation'
+import { Loader2, Send, CheckCircle } from 'lucide-react'
 
 const ratingOptions = [1, 2, 3, 4, 5]
 
@@ -35,6 +35,7 @@ interface SurveyForm {
 
 export default function PublicSurveyPage() {
   const params = useParams<{ token: string }>()
+  const router = useRouter()
   const paramValue = decodeURIComponent(params.token)
 
   const [info, setInfo] = useState<SurveyInfo | null>(null)
@@ -49,6 +50,7 @@ export default function PublicSurveyPage() {
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
+  const [redirecting, setRedirecting] = useState(false)
   const [error, setError] = useState('')
   const hasProcessedRef = useRef(false)
 
@@ -186,6 +188,21 @@ export default function PublicSurveyPage() {
       }
 
       setSubmitted(true)
+      
+      // Guardar en sessionStorage para mostrar mensaje en dashboard
+      sessionStorage.setItem('survey_completed', 'true')
+      
+      // Iniciar redirección después de mostrar el mensaje
+      setRedirecting(true)
+      setTimeout(() => {
+        // Verificar si el usuario está autenticado
+        const token = localStorage.getItem('access_token')
+        if (token) {
+          router.push('/dashboard')
+        } else {
+          router.push('/')
+        }
+      }, 2500) // Esperar 2.5 segundos para que el usuario vea el mensaje
     } catch (err: any) {
       console.error(err)
       setError(err.message || 'Ocurrió un error al guardar la encuesta')
@@ -324,8 +341,20 @@ export default function PublicSurveyPage() {
                 </button>
 
                 {submitted && (
-                  <div className="rounded-lg bg-green-50 border border-green-200 px-4 py-3 text-green-700">
-                    ¡Gracias por compartir tu experiencia! Tus respuestas se han registrado correctamente.
+                  <div className="rounded-lg bg-green-50 border border-green-200 px-4 py-4 text-green-700">
+                    <div className="flex items-center gap-3">
+                      <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />
+                      <div>
+                        <p className="font-semibold">¡Gracias por compartir tu experiencia!</p>
+                        <p className="text-sm mt-1">Tus respuestas se han registrado correctamente.</p>
+                        {redirecting && (
+                          <p className="text-sm mt-2 flex items-center gap-2">
+                            <Loader2 className="w-4 h-4 animate-spin" />
+                            Redirigiendo...
+                          </p>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
@@ -336,4 +365,3 @@ export default function PublicSurveyPage() {
     </div>
   )
 }
-

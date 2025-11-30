@@ -47,11 +47,25 @@ export default function ClientDashboard() {
   const [profile, setProfile] = useState<ClientProfile | null>(null)
   const [loading, setLoading] = useState(true)
   const [pendingSurvey, setPendingSurvey] = useState<any>(null)
+  const [showSurveyThanks, setShowSurveyThanks] = useState(false)
 
   const handleLogout = () => {
     localStorage.clear()
     window.location.href = '/login'
   }
+
+  // Verificar si viene de completar una encuesta
+  useEffect(() => {
+    const surveyCompleted = sessionStorage.getItem('survey_completed')
+    if (surveyCompleted) {
+      setShowSurveyThanks(true)
+      sessionStorage.removeItem('survey_completed')
+      // Ocultar el mensaje después de 5 segundos
+      setTimeout(() => {
+        setShowSurveyThanks(false)
+      }, 5000)
+    }
+  }, [])
 
   // Cargar datos reales desde la API
   useEffect(() => {
@@ -282,6 +296,29 @@ export default function ClientDashboard() {
           </div>
         </div>
       </header>
+
+      {/* Mensaje de agradecimiento por completar encuesta */}
+      {showSurveyThanks && (
+        <div className="bg-green-500 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <CheckCircle className="w-6 h-6" />
+                <div>
+                  <p className="font-semibold">¡Gracias por completar la encuesta!</p>
+                  <p className="text-sm text-green-100">Tu opinión nos ayuda a mejorar nuestro servicio.</p>
+                </div>
+              </div>
+              <button
+                onClick={() => setShowSurveyThanks(false)}
+                className="text-white/80 hover:text-white p-1"
+              >
+                <XCircle className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Información del cliente */}
@@ -548,4 +585,3 @@ export default function ClientDashboard() {
     </div>
   )
 }
-
