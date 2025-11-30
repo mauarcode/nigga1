@@ -32,6 +32,7 @@ interface Appointment {
   fecha_hora: string
   estado: string
   encuesta_completada?: boolean
+  survey_token?: string
 }
 
 interface ClientProfile {
@@ -112,6 +113,7 @@ export default function ClientDashboard() {
             const apt = completedAppointments[0]
             setPendingSurvey({
               appointmentId: apt.id,
+              surveyToken: apt.survey_token || apt.id, // Usar survey_token si existe, sino el ID
               barbero: `${apt.barbero?.user?.first_name || ''} ${apt.barbero?.user?.last_name || ''}`.trim() || 'Barbero',
               fecha_hora: apt.fecha_hora
             })
@@ -299,7 +301,7 @@ export default function ClientDashboard() {
                 onClick={() => {
                   if (pendingSurvey) {
                     if (confirm('Antes de agendar tu siguiente cita, cuéntanos cómo te fue con ' + pendingSurvey.barbero + '. ¿Deseas calificar el servicio ahora?')) {
-                      window.location.href = `/encuesta/${pendingSurvey.appointmentId}`
+                      window.location.href = `/encuesta/${pendingSurvey.surveyToken}`
                     }
                   } else {
                     window.location.href = '/cita'
@@ -388,7 +390,7 @@ export default function ClientDashboard() {
                     Antes de agendar tu siguiente cita, cuéntanos cómo te fue con {pendingSurvey.barbero}
                   </p>
                   <Link
-                    href={`/encuesta/${pendingSurvey.appointmentId}`}
+                    href={`/encuesta/${pendingSurvey.surveyToken}`}
                     className="inline-flex items-center px-4 py-2 bg-yellow-600 text-white font-medium rounded-lg hover:bg-yellow-700 transition-colors"
                   >
                     <Star className="w-4 h-4 mr-2" />
@@ -505,12 +507,14 @@ export default function ClientDashboard() {
                           </h4>
                           <div className="flex items-center space-x-2">
                             {getStatusBadge(appointment.estado)}
-                            <Link 
-                              href={`/encuesta/${appointment.id}`}
-                              className="text-primary-600 hover:text-primary-800 text-sm font-medium"
-                            >
-                              Evaluar Servicio
-                            </Link>
+                            {!appointment.encuesta_completada && (
+                              <Link 
+                                href={`/encuesta/${appointment.survey_token || appointment.id}`}
+                                className="text-primary-600 hover:text-primary-800 text-sm font-medium"
+                              >
+                                Evaluar Servicio
+                              </Link>
+                            )}
                           </div>
                         </div>
                         <p className="text-gray-600 text-sm mb-2">
