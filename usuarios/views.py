@@ -140,12 +140,20 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         """Crear cita y actualizar contador de cortes del cliente"""
         appointment = serializer.save()
 
-        # Si la cita se marca como completada, incrementar cortes del cliente
-        if appointment.estado == 'completada' and appointment.cliente:
-            cliente = appointment.cliente
-            cliente.cortes_realizados += 1
-            cliente.fecha_ultimo_corte = timezone.now()
-            cliente.save()
+        # Si la cita se marca como completada, incrementar cortes del cliente y crear Survey
+        if appointment.estado == 'completada':
+            if appointment.cliente:
+                cliente = appointment.cliente
+                cliente.cortes_realizados += 1
+                cliente.fecha_ultimo_corte = timezone.now()
+                cliente.save()
+            
+            # Crear Survey automáticamente
+            Survey.objects.create(
+                appointment=appointment,
+                survey_token=str(uuid.uuid4()),
+                completada=False
+            )
 
     def perform_update(self, serializer):
         estado_anterior = serializer.instance.estado
@@ -154,12 +162,21 @@ class AppointmentViewSet(viewsets.ModelViewSet):
         if (
             appointment.estado == 'completada'
             and estado_anterior != 'completada'
-            and appointment.cliente
         ):
-            cliente = appointment.cliente
-            cliente.cortes_realizados += 1
-            cliente.fecha_ultimo_corte = timezone.now()
-            cliente.save()
+            # Incrementar cortes del cliente
+            if appointment.cliente:
+                cliente = appointment.cliente
+                cliente.cortes_realizados += 1
+                cliente.fecha_ultimo_corte = timezone.now()
+                cliente.save()
+            
+            # Crear Survey automáticamente si no existe
+            if not Survey.objects.filter(appointment=appointment).exists():
+                Survey.objects.create(
+                    appointment=appointment,
+                    survey_token=str(uuid.uuid4()),
+                    completada=False
+                )
 
         if not appointment.survey_token:
             appointment.save(update_fields=['survey_token'])
