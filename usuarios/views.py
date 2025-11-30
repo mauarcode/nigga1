@@ -1162,19 +1162,13 @@ def admin_users_management(request, user_id=None):
                     user=user,
                     defaults={
                         'especialidad': 'Cortes clásicos y modernos',
-                        'biografia': f'Barbero profesional - {user.first_name} {user.last_name}'.strip(),
+                        'descripcion': f'Barbero profesional - {user.first_name} {user.last_name}'.strip(),
                         'activo': True,
                         'qr_token': str(uuid.uuid4())
                     }
                 )
             elif rol == 'cliente':
-                ClientProfile.objects.get_or_create(
-                    user=user,
-                    defaults={
-                        'cortes_realizados': 0,
-                        'cortes_para_promocion': 5,
-                    }
-                )
+                ClientProfile.objects.get_or_create(user=user)
             
             return Response({'message': 'Usuario creado correctamente', 'id': user.id}, status=status.HTTP_201_CREATED)
         except Exception as e:
@@ -1215,17 +1209,13 @@ def admin_users_management(request, user_id=None):
                 BarberProfile.objects.create(
                     user=user,
                     especialidad='Cortes clásicos y modernos',
-                    biografia=f'Barbero profesional - {user.first_name} {user.last_name}'.strip(),
+                    descripcion=f'Barbero profesional - {user.first_name} {user.last_name}'.strip(),
                     activo=True,
                     qr_token=str(uuid.uuid4())
                 )
             # Si cambió a rol cliente, crear perfil si no existe
             elif new_rol == 'cliente' and not ClientProfile.objects.filter(user=user).exists():
-                ClientProfile.objects.create(
-                    user=user,
-                    cortes_realizados=0,
-                    cortes_para_promocion=5,
-                )
+                ClientProfile.objects.get_or_create(user=user)
             
             return Response({'message': 'Usuario actualizado correctamente'})
         except CustomUser.DoesNotExist:
