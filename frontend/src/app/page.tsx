@@ -419,12 +419,12 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo y Nombre */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 md:gap-3">
               {logoImage && logoImage.trim() ? (
                 <img
                   src={logoImage}
                   alt="Logo BarberRock"
-                  className="h-10 w-auto object-contain max-w-[120px]"
+                  className="h-8 md:h-10 w-auto object-contain max-w-[80px] md:max-w-[120px]"
                   onError={(e) => {
                     // Si falla la carga, ocultar la imagen y mostrar solo el texto
                     const img = e.currentTarget
@@ -443,11 +443,11 @@ export default function HomePage() {
                 />
               ) : null}
               <h1 
-                className={`text-xl font-bold transition-colors ${
+                className={`text-base md:text-xl font-bold transition-colors ${
                   isScrolled ? 'text-gray-900' : 'text-white'
                 }`}
               >
-                {logoImage && logoImage.trim() ? 'BarberRock' : 'Barbería BarberRock'}
+                {logoImage && logoImage.trim() ? 'BarberRock' : <><span className="hidden sm:inline">Barbería </span>BarberRock</>}
               </h1>
             </div>
             
@@ -480,18 +480,18 @@ export default function HomePage() {
             </div>
             
             {/* Botón CTA */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 md:gap-3">
               <Link
                 href="/cita"
-                className={`font-bold py-2 px-6 rounded-lg text-sm transition-all ${
+                className={`font-bold py-1.5 px-3 md:py-2 md:px-6 rounded-lg text-xs md:text-sm transition-all whitespace-nowrap ${
                   isScrolled
                     ? 'bg-primary-600 text-white hover:bg-primary-700'
                     : 'bg-white text-primary-600 hover:bg-gray-100'
                 }`}
                 style={isScrolled ? {} : { color: brandPrimary }}
               >
-                <Calendar className="inline-block w-4 h-4 mr-2" />
-                Agendar Cita
+                <Calendar className="inline-block w-3 h-3 md:w-4 md:h-4 mr-1 md:mr-2" />
+                <span className="hidden sm:inline">Agendar</span> Cita
               </Link>
               
               {/* Botón menú móvil */}
