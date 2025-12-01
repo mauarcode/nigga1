@@ -67,9 +67,12 @@ export default function QRScanPage() {
       const data = await response.json()
       if (data.tiene_cita_pendiente && data.cita) {
         setCitaInfo(data.cita)
-        // Redirigir automáticamente a la encuesta usando el ID de la cita
-        // La ruta /encuesta/[token] detectará que es un ID y redirigirá correctamente
-        router.push(`/encuesta/${data.cita.id}`)
+        // Redirigir automáticamente a la encuesta usando el encuesta_token/survey_token (preferido) o ID
+        const token = data.cita.encuesta_token || data.cita.survey_token
+        const encuestaPath = token 
+          ? `/encuesta/${token}` 
+          : `/encuesta/${data.cita.id}`
+        router.push(encuestaPath)
       }
     } catch (err: any) {
       setError(err.message || 'Error al cargar la información')

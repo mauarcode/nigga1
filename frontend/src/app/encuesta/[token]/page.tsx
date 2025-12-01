@@ -87,7 +87,7 @@ export default function PublicSurveyPage() {
             return
           }
 
-          // Obtener información de la cita
+          // Obtener información de la cita para conseguir el survey_token
           const appointmentResponse = await fetch(`https://barberrock.es/api/citas/${paramValue}/`, {
             headers: {
               'Authorization': `Bearer ${authToken}`
@@ -100,7 +100,13 @@ export default function PublicSurveyPage() {
 
           const appointment = await appointmentResponse.json()
           
-          // Intentar obtener el survey token de la cita
+          // Si la cita tiene survey_token, redirigir con él
+          if (appointment.survey_token) {
+            window.location.href = `/encuesta/${appointment.survey_token}`
+            return
+          }
+          
+          // Si no hay survey_token en la cita, buscar en encuestas
           const surveyResponse = await fetch(`https://barberrock.es/api/encuestas/?cita=${paramValue}`, {
             headers: {
               'Authorization': `Bearer ${authToken}`
@@ -112,7 +118,6 @@ export default function PublicSurveyPage() {
             const surveys = surveyData.results || surveyData
             
             if (surveys && surveys.length > 0 && surveys[0].survey_token) {
-              // Redirigir a la misma página pero con el token correcto
               window.location.href = `/encuesta/${surveys[0].survey_token}`
               return
             }
