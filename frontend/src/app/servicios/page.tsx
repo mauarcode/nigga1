@@ -10,6 +10,7 @@ interface Service {
   nombre: string
   descripcion: string
   precio: number
+  precio_desde?: boolean
   duracion: number
   activo: boolean
   imagen?: string
@@ -147,6 +148,7 @@ export default function ServiciosPage() {
                   </div>
                   <div className="text-right">
                     <span className="text-2xl font-bold text-primary-600">
+                      {service.precio_desde && <span className="text-sm font-normal text-gray-500">desde </span>}
                       ${service.precio}
                     </span>
                   </div>
