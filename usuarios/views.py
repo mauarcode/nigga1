@@ -1268,6 +1268,7 @@ def admin_services_management(request, service_id=None):
                     'nombre': service.nombre,
                     'descripcion': service.descripcion,
                     'precio': str(service.precio),
+                    'precio_desde': service.precio_desde,
                     'comision_barbero': str(service.comision_barbero),
                     'duracion': service.duracion,
                     'activo': service.activo
@@ -1277,7 +1278,7 @@ def admin_services_management(request, service_id=None):
         else:
             # Listar todos los servicios
             services = Service.objects.all().values(
-                'id', 'nombre', 'descripcion', 'precio', 'comision_barbero', 'duracion', 'activo'
+                'id', 'nombre', 'descripcion', 'precio', 'precio_desde', 'comision_barbero', 'duracion', 'activo'
             )
             return Response(list(services))
 
@@ -1289,6 +1290,7 @@ def admin_services_management(request, service_id=None):
                 nombre=data['nombre'],
                 descripcion=data['descripcion'],
                 precio=data['precio'],
+                precio_desde=data.get('precio_desde', False),
                 duracion=data['duracion'],
                 comision_barbero=data.get('comision_barbero', 0),
                 activo=data.get('activo', True)
@@ -1313,6 +1315,8 @@ def admin_services_management(request, service_id=None):
                 service.descripcion = data['descripcion']
             if 'precio' in data:
                 service.precio = data['precio']
+            if 'precio_desde' in data:
+                service.precio_desde = data['precio_desde']
             if 'comision_barbero' in data:
                 service.comision_barbero = data['comision_barbero']
             if 'duracion' in data:
