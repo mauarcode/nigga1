@@ -10,6 +10,7 @@ interface Product {
   nombre: string
   descripcion: string
   precio: string
+  precio_desde: boolean
   imagen?: string | null
   stock: number
   activo: boolean
@@ -20,6 +21,7 @@ interface FormState {
   nombre: string
   descripcion: string
   precio: string
+  precio_desde: boolean
   stock: number
   activo: boolean
 }
@@ -35,6 +37,7 @@ export default function ProductsManager() {
     nombre: '',
     descripcion: '',
     precio: '',
+    precio_desde: false,
     stock: 0,
     activo: true,
   })
@@ -107,6 +110,7 @@ export default function ProductsManager() {
       nombre: '',
       descripcion: '',
       precio: '',
+      precio_desde: false,
       stock: 0,
       activo: true,
     })
@@ -162,6 +166,7 @@ export default function ProductsManager() {
       nombre: product.nombre,
       descripcion: product.descripcion,
       precio: product.precio,
+      precio_desde: product.precio_desde || false,
       stock: product.stock,
       activo: product.activo,
     })
@@ -223,6 +228,7 @@ export default function ProductsManager() {
       payload.append('nombre', formData.nombre)
       payload.append('descripcion', formData.descripcion)
       payload.append('precio', formData.precio || '0')
+      payload.append('precio_desde', String(formData.precio_desde))
       payload.append('stock', String(formData.stock ?? 0))
       payload.append('activo', String(formData.activo))
 
@@ -360,7 +366,10 @@ export default function ProductsManager() {
                   <p className="text-gray-600 text-sm mb-4">{product.descripcion || 'Sin descripción'}</p>
 
                   <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
-                    <span className="text-lg font-semibold text-primary-600">${Number(product.precio).toFixed(2)}</span>
+                    <span className="text-lg font-semibold text-primary-600">
+                      {product.precio_desde && <span className="text-sm font-normal text-gray-500">desde </span>}
+                      ${Number(product.precio).toFixed(2)}
+                    </span>
                     <span>Stock: {product.stock}</span>
                   </div>
 
@@ -446,18 +455,33 @@ export default function ProductsManager() {
                     className="input-field"
                   />
                 </div>
-                <div className="flex items-center mt-6">
-                  <input
-                    type="checkbox"
-                    id="activo"
-                    name="activo"
-                    checked={formData.activo}
-                    onChange={(e) => setFormData((prev) => ({ ...prev, activo: e.target.checked }))}
-                    className="w-4 h-4 text-primary-600 rounded focus:ring-primary-500"
-                  />
-                  <label htmlFor="activo" className="ml-2 text-sm text-gray-700">
-                    Producto activo
-                  </label>
+                <div className="flex flex-col gap-3 mt-6">
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="activo"
+                      name="activo"
+                      checked={formData.activo}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, activo: e.target.checked }))}
+                      className="w-4 h-4 text-primary-600 rounded focus:ring-primary-500"
+                    />
+                    <label htmlFor="activo" className="ml-2 text-sm text-gray-700">
+                      Producto activo
+                    </label>
+                  </div>
+                  <div className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id="precio_desde"
+                      name="precio_desde"
+                      checked={formData.precio_desde}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, precio_desde: e.target.checked }))}
+                      className="w-4 h-4 text-primary-600 rounded focus:ring-primary-500"
+                    />
+                    <label htmlFor="precio_desde" className="ml-2 text-sm text-gray-700">
+                      Precio "desde" (el precio indicado es el mínimo)
+                    </label>
+                  </div>
                 </div>
               </div>
 
@@ -529,6 +553,3 @@ export default function ProductsManager() {
     </div>
   )
 }
-
-
-

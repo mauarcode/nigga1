@@ -9,6 +9,7 @@ interface Service {
   nombre: string
   descripcion: string
   precio: number
+  precio_desde?: boolean
   duracion: number
 }
 
@@ -479,6 +480,7 @@ export default function CitaPage() {
                       </div>
                       <div className="text-right">
                         <span className="text-xl font-bold text-primary-600">
+                          {service.precio_desde && <span className="text-sm font-normal text-gray-500">desde </span>}
                           ${service.precio}
                         </span>
                       </div>
@@ -721,6 +723,15 @@ export default function CitaPage() {
                           Productos: ${productosTotal.toFixed(2)}
                         </p>
                       )}
+                    </>
+                  ) : selectedService?.precio_desde ? (
+                    <>
+                      <p className="text-xl font-bold text-primary-600">
+                        Desde ${selectedService.precio}
+                      </p>
+                      <p className="text-sm text-gray-500">
+                        El precio final se determina en el local
+                      </p>
                     </>
                   ) : (
                     <>

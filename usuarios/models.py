@@ -206,6 +206,11 @@ class Service(models.Model):
         verbose_name='¿Está activo?'
     )
 
+    precio_desde = models.BooleanField(
+        default=False,
+        verbose_name='El precio es "desde" (precio mínimo)'
+    )
+
     imagen = models.ImageField(
         upload_to='servicios/',
         blank=True,
@@ -255,6 +260,11 @@ class Product(models.Model):
     activo = models.BooleanField(
         default=True,
         verbose_name='¿Está activo?'
+    )
+
+    precio_desde = models.BooleanField(
+        default=False,
+        verbose_name='El precio es "desde" (precio mínimo)'
     )
 
     fecha_creacion = models.DateTimeField(

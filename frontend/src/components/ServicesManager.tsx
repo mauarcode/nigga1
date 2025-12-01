@@ -9,6 +9,7 @@ interface Servicio {
   nombre: string
   descripcion: string
   precio: string
+  precio_desde: boolean
   comision_barbero: string
   duracion: number
   categoria?: string
@@ -19,6 +20,7 @@ interface FormData {
   nombre: string
   descripcion: string
   precio: number
+  precio_desde: boolean
   comision_barbero: number
   duracion: number
   categoria: string
@@ -35,6 +37,7 @@ const [formData, setFormData] = useState<FormData>({
     nombre: '',
     descripcion: '',
     precio: 0,
+    precio_desde: false,
     comision_barbero: 0,
     duracion: 30,
     categoria: '',
@@ -87,6 +90,7 @@ const [formData, setFormData] = useState<FormData>({
       nombre: '',
       descripcion: '',
       precio: 0,
+      precio_desde: false,
       comision_barbero: 0,
       duracion: 30,
       categoria: '',
@@ -108,6 +112,7 @@ const [formData, setFormData] = useState<FormData>({
       nombre: service.nombre,
       descripcion: service.descripcion,
       precio: parseFloat(service.precio ?? '0') || 0,
+      precio_desde: service.precio_desde || false,
       comision_barbero: parseFloat(service.comision_barbero ?? '0') || 0,
       duracion: service.duracion,
       categoria: service.categoria || '',
@@ -236,7 +241,10 @@ const [formData, setFormData] = useState<FormData>({
                   
                   <div className="flex items-center justify-between mb-4">
                     <div>
-                      <div className="text-2xl font-bold text-primary-600">${service.precio}</div>
+                      <div className="text-2xl font-bold text-primary-600">
+                        {service.precio_desde && <span className="text-sm font-normal text-gray-500">desde </span>}
+                        ${service.precio}
+                      </div>
                       <div className="text-sm text-gray-500">{service.duracion} minutos</div>
                       <div className="text-sm text-gray-500 mt-1">
                         Comisión barbero: ${service.comision_barbero || '0.00'}
@@ -395,6 +403,20 @@ const [formData, setFormData] = useState<FormData>({
                 />
                 <label htmlFor="activo" className="ml-2 block text-sm text-gray-900">
                   Servicio activo (visible para clientes)
+                </label>
+              </div>
+
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  id="precio_desde"
+                  name="precio_desde"
+                  checked={formData.precio_desde}
+                  onChange={handleInputChange}
+                  className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                />
+                <label htmlFor="precio_desde" className="ml-2 block text-sm text-gray-900">
+                  Precio "desde" (el precio indicado es el mínimo)
                 </label>
               </div>
 
